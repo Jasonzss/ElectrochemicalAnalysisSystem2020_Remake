@@ -1,0 +1,69 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+target/
+venv/
+out/
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+### IntelliJ IDEA ###
+*.iml
+*.ipr
+*.iws
+.idea
+.idea/
+.classpath
+.project
+.settings/
+bin/
+tem/
+*.iml/
+
+#rebel
+*rebel.xml*
+
+#font-end
+.DS_Store
+ui/node_modules/
+ui/dist/
+ui/npm-debug.log*
+ui/yarn-debug.log*
+ui/yarn-error.log*
+**/*.log
+
+ui/tests/**/coverage/
+ui/tests/e2e/reports
+ui/selenium-debug.log
+
+# Editor directories and files
+ui/.idea
+ui/.vscode
+ui/.vs
+ui/*.suo
+ui/*.ntvs*
+ui/*.njsproj
+ui/*.sln
+ui/*.local
+
+ui/package-lock.json
+ui/yarn.lock
+
+/package-lock.json
