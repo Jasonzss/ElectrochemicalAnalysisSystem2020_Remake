@@ -1,4 +1,4 @@
-package com.bluedot.domain.algorithm;
+package com.bluedot.domain.algorithm.model;
 
 /**
  * @Author Jason
