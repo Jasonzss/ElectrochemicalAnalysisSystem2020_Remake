@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="info">
+
+
+    <!--日志处理-->
+    <Appenders>
+        <!--控制台输出 appender-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] [%-5level] %class{36}:%L --- %m%n"/>
+        </Console>
+    </Appenders>
+
+    <!--logger定义-->
+    <Loggers>
+        <!--rootLogger配置-->
+        <root level="debug">
+            <AppenderRef ref="Console"/>
+        </root>
+    </Loggers>
+
+</Configuration>
