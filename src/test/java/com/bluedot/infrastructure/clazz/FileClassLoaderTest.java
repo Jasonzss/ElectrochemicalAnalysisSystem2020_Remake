@@ -3,6 +3,7 @@ package com.bluedot.infrastructure.clazz;
 import com.bluedot.BaseTest;
 import org.junit.Test;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -15,9 +16,10 @@ public class FileClassLoaderTest extends BaseTest {
     @Test
     public void testLoadClass() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException, ClassNotFoundException, InstantiationException {
         FileClassLoader fileClassLoader = new FileClassLoader();
-        fileClassLoader.setClassFile("src/test/resources/algo/java/java_javaFile/JavaFile.class");
+        fileClassLoader.setClassFile("src\\main\\resources\\algo\\java\\java_test\\JavaAlgorithm.class");
         Object obj = null;
-        obj = fileClassLoader.loadClass("JavaFile").newInstance();
+        obj = fileClassLoader.loadClass("algo.java.java_test.JavaAlgorithm").newInstance();
+        log.info(String.valueOf(obj.getClass()));
         Method m = obj.getClass().getMethod("hello");
         m.invoke(obj);
     }

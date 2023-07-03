@@ -18,7 +18,7 @@ public class HelloJavaCompiler {
     @Test
     public void testRun() {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        int result = compiler.run(null, null, null, "src/test/resources/algo/java/java_javaFile/JavaFile.java");
+        int result = compiler.run(null, null, null, "src/test/resources/algo/java/java_javaFile/JavaAlgorithm.java");
         log.debug(result == 0 ? "编译成功" : "编译失败");
     }
 

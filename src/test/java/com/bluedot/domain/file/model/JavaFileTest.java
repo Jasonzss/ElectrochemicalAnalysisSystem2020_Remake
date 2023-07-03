@@ -1,14 +1,13 @@
 package com.bluedot.domain.file.model;
 
+import cn.hutool.core.io.IoUtil;
 import com.bluedot.BaseTest;
-import com.bluedot.domain.file.FileCreator;
-import com.bluedot.domain.file.exception.JavaCodeException;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 /**
  * @Author Jason
@@ -17,41 +16,23 @@ import java.io.FileNotFoundException;
  */
 public class JavaFileTest extends BaseTest {
     JavaFile file1;
-    JavaFile file2;
     JavaFile file3;
-    File dir;
-
-    FileCreator fileCreator = new FileCreator();
 
     @Before
-    public void newJavaFile() throws FileNotFoundException {
-        file1 = new JavaFile("src/test/resources/algo/java/java_javaFile/JavaFile.java");
-        try {
-            file2 = new JavaFile("D:/Git/gitCodes/ElectrochemicalAnalysisSystem2020_Remake/src/test/resources/algo/java/java_javaFile/JavaFile.java");
-        }catch (Exception e){
-            //do nothing
-            //因为绝对路径各有不同
-        }
-
-        file3 = new JavaFile("src/main/resources/algo/java/java_12345678/JavaAlgorithm.java");
-        fileCreator.createFile(file3);
-    }
-
-    @After
-    public void deleteFile() throws InterruptedException {
-        file3.deleteOnExit();
-        Thread.sleep(1000);
-        dir = new File("src/main/resources/algo/java/java_12345678");
-        dir.delete();
+    public void newJavaFile() {
+        file1 = new JavaFile("java_test");
+        file3 = new JavaFile("java_test_exception");
     }
 
     @Test
-    public void testGetFullClassName() {
-        System.out.println(file1.getFullClassName());
+    public void testReadFile() throws FileNotFoundException {
+        IoUtil.readLines(file1.getInputStream(), StandardCharsets.UTF_8, new ArrayList<>())
+                .forEach(System.out::println);
     }
 
-    @Test(expected = JavaCodeException.class)
-    public void testGetFullClassName_() {
-        System.out.println(file3.getFullClassName());
+    //TODO 异常检查待完成
+    @Test
+    public void testCheckSourceCode_JavaCodeException() {
+        file3.checkSourceCode();
     }
 }
