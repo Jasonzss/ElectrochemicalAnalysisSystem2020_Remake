@@ -1,5 +1,9 @@
-public class JavaFile{
-    public JavaFile() {
+package algo.java.java_test_compile;
+
+public class JavaAlgorithm{
+    public String algorithmMethodName = "hello";
+
+    public JavaAlgorithm() {
     }
 
     public void hello() {
@@ -12,10 +16,6 @@ public class JavaFile{
 
     public void helloParam(int a){
         System.out.println("this is "+a);
-    }
-
-    public void helloException(){
-        int a = 1/0;
     }
 
     public void helloNewMethod(){

@@ -1,4 +1,8 @@
+package algo.java.java_test;
+
 public class JavaAlgorithm{
+    public String algorithmMethodName = "helloParam";
+
     public JavaAlgorithm() {
     }
 
