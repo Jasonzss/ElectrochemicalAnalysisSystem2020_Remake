@@ -1,6 +1,7 @@
 package com.bluedot.domain.file.exception;
 
 import com.bluedot.domain.file.FileSystemException;
+import com.bluedot.infrastructure.exception.ErrorCode;
 
 /**
  * @Author Jason
@@ -8,20 +9,23 @@ import com.bluedot.domain.file.FileSystemException;
  * @Description ：
  */
 public class JavaCodeException extends FileSystemException {
-
-    public JavaCodeException(String message) {
-        super(message);
+    public JavaCodeException(ErrorCode errorCode) {
+        super(errorCode);
     }
 
-    public JavaCodeException(String message, Throwable cause) {
-        super(message, cause);
+    public JavaCodeException(String message, ErrorCode errorCode) {
+        super(message, errorCode);
     }
 
-    public JavaCodeException(Throwable cause) {
-        super(cause);
+    public JavaCodeException(String message, Throwable cause, ErrorCode errorCode) {
+        super(message, cause, errorCode);
     }
 
-    public JavaCodeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
+    public JavaCodeException(Throwable cause, ErrorCode errorCode) {
+        super(cause, errorCode);
+    }
+
+    public JavaCodeException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace, ErrorCode errorCode) {
+        super(message, cause, enableSuppression, writableStackTrace, errorCode);
     }
 }
