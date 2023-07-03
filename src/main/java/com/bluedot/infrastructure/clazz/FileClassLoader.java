@@ -43,8 +43,8 @@ public class FileClassLoader extends ClassLoader {
         }
         Class<?> clazz;
 
-        try {
-            clazz = instantiateClass(className, new FileInputStream(classFile), classFile.length());
+        try(FileInputStream fileInputStream = new FileInputStream(classFile)) {
+            clazz = instantiateClass(className, fileInputStream, classFile.length());
         } catch (FileNotFoundException e) {
             log.error("can't find class file named:"+classFile.getPath());
             throw new ClassNotFoundException("can't find class file:"+classFile.getPath(),e);
