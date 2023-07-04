@@ -34,6 +34,7 @@ public enum CommonErrorCode implements ErrorCode {
     E_2007(2007,HttpStatus.SC_INTERNAL_SERVER_ERROR,"目标文件丢失"),
     E_2008(2008,HttpStatus.SC_INTERNAL_SERVER_ERROR,"错误的文件id无法找到匹配的文件类型"),
     E_2009(2009,HttpStatus.SC_INTERNAL_SERVER_ERROR,"创建文件失败"),
+    E_2010(2009,HttpStatus.SC_INTERNAL_SERVER_ERROR,"文件系统出现异常"),
 
     /**
      * 算法模块异常

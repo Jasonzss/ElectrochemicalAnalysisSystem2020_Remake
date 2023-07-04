@@ -20,6 +20,8 @@ import java.io.*;
  * 备份&还原
  *
  * TODO 并发操作下可能会出现文件操作冲突，这个问题需要解决 IORuntimeException: 另一个程序正在使用此文件，进程无法访问。
+ * 1. 排查所有IO流使用后是否及时关闭
+ * 2. 在单个文件被多方请求处理的时候加入一些并发逻辑的处理
  *
  */
 public abstract class AbstractDomainFile implements DomainFile {
@@ -72,11 +74,13 @@ public abstract class AbstractDomainFile implements DomainFile {
     public long updateFile(InputStream is) {
         InputStream inputStream = doUpdate(is);
 
-        try {
-            File touch = FileUtil.touch(file);
-            return IoUtil.copy(inputStream, new FileOutputStream(touch));
+        // 使用try-with-resource语句在使用完IO流后立马关闭
+        try(OutputStream out = new FileOutputStream(FileUtil.touch(file))) {
+            return IoUtil.copy(inputStream, out);
         } catch (FileNotFoundException e) {
             throw new FileSystemException(e, CommonErrorCode.E_2002);
+        } catch (IOException e) {
+            throw new FileSystemException(e, CommonErrorCode.E_2010);
         }
     }
 
