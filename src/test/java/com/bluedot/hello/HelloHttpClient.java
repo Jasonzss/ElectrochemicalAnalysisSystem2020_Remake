@@ -22,6 +22,7 @@ import org.junit.Test;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -150,7 +151,7 @@ public class HelloHttpClient extends BaseTest {
                 .build();
         post.setConfig(requestConfig);
         //表示客户端发送给服务器端的数据格式
-        post.setHeader("Content-Type", "multipart/form-data; charset=ISO-8859-1; boundary=mVeFwaGv8_V9nTHRREq6Aw0oksC66x");
+        post.setHeader("Content-Type", "multipart/form-data; charset=UTF-8; boundary=mVeFwaGv8_V9nTHRREq6Aw0oksC66x");
         //httpPost.setHeader("Accept", "*/*");这样也ok,只不过服务端返回的数据不一定为json
         post.setHeader("Accept", "application/json");
 
@@ -168,13 +169,13 @@ public class HelloHttpClient extends BaseTest {
         ));
 
         m.forEach((k, v) -> {
-            builder.addTextBody(k, gson.toJson(v), ContentType.TEXT_PLAIN);
+            builder.addTextBody(k, gson.toJson(v), ContentType.APPLICATION_JSON);
         });
 
 //        builder.addTextBody("params", "jason", ContentType.TEXT_PLAIN);
 
         post.setEntity(builder.build());
 
-        httpclient.execute(post, new BasicHttpClientResponseHandler());
+        System.out.println(IoUtil.read(httpclient.execute(post).getEntity().getContent(), StandardCharsets.UTF_8));
     }
 }
