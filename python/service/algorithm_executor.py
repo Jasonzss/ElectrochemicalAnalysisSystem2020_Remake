@@ -67,4 +67,5 @@ def load_module_from_stream(stream, module_name):
     code = compile(stream.read(), module_name, 'exec')
     module = util.module_from_spec(util.spec_from_loader(module_name, loader=None))
     exec(code, module.__dict__)
+    stream.close()
     return module

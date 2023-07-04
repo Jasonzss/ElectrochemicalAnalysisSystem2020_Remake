@@ -16,6 +16,7 @@ import org.apache.hc.core5.util.Timeout;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -135,18 +136,20 @@ public class PythonAlgorithm extends AbstractAlgorithm {
                 .build();
         post.setConfig(requestConfig);
         //表示客户端发送给服务器端的数据格式
-        post.setHeader("Content-Type", "multipart/form-data; charset=ISO-8859-1; boundary=mVeFwaGv8_V9nTHRREq6Aw0oksC66x");
+        post.setHeader("Content-Type", "multipart/form-data; charset=UTF-8; boundary=mVeFwaGv8_V9nTHRREq6Aw0oksC66x");
         post.setHeader("Accept", "application/json;charset=UTF-8");
 
         MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 
         args.forEach((k,v) -> {
-            builder.addTextBody(k, v.toString());
+            builder.addTextBody(k, v.toString(), ContentType.APPLICATION_JSON);
         });
 
         HttpEntity entity = builder.addBinaryBody("is", inputStream, ContentType.APPLICATION_OCTET_STREAM, "is")
                 .setBoundary("mVeFwaGv8_V9nTHRREq6Aw0oksC66x")
                 .build();
+
+        builder.setCharset(StandardCharsets.UTF_8);
 
         post.setEntity(entity);
 

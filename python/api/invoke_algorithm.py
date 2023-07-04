@@ -43,8 +43,9 @@ def invoke():
         # 调用io流执行器
         res = algorithm_executor.execute_algo_by_input_stream(request.files.get("is").stream, p)
 
+    # dumps方法操作中文时会出现编码问题，所以需要设置 ensure_ascii=False
     # 调用文件路径执行器
-    return json.dumps(res)
+    return json.dumps(res, ensure_ascii=False)
 
 
 # 判断
@@ -118,7 +119,7 @@ def test3():
     print(p)
     print(p.__class__)
 
-    return "<p>success</p>"
+    return "<p>成功</p>"
 
 
 if __name__ == '__main__':
