@@ -4,7 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import com.bluedot.BaseTest;
 import com.bluedot.domain.algorithm.Algorithm;
 import com.bluedot.domain.algorithm.exception.AlgoInvokeException;
-import com.bluedot.domain.algorithm.po.PersistantAlgorithm;
+import com.bluedot.domain.algorithm.PersistantAlgorithm;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.repository.AlgorithmRepository;
 import org.junit.Before;

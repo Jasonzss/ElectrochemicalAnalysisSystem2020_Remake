@@ -1,4 +1,4 @@
-package com.bluedot.domain.algorithm;
+package com.bluedot.infrastructure.repository.enumeration;
 
 /**
  * @Author Jason

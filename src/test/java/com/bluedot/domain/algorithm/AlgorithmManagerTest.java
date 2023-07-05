@@ -5,7 +5,7 @@ import cn.hutool.core.io.FileUtil;
 import com.bluedot.BaseTest;
 import com.bluedot.domain.algorithm.exception.AlgorithmException;
 import com.bluedot.domain.algorithm.java.JavaAlgoFactory;
-import com.bluedot.domain.algorithm.po.PersistantAlgorithm;
+import com.bluedot.infrastructure.repository.enumeration.AlgorithmStatus;
 import com.bluedot.domain.algorithm.python.PythonAlgoFactory;
 import com.bluedot.infrastructure.repository.AlgorithmRepository;
 import org.junit.After;

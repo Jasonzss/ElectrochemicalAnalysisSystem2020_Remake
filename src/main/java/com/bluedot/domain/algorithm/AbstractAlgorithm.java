@@ -1,6 +1,5 @@
 package com.bluedot.domain.algorithm;
 
-import com.bluedot.domain.algorithm.po.PersistantAlgorithm;
 import com.bluedot.domain.file.AbstractDomainFile;
 
 /**

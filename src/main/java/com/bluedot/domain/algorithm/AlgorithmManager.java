@@ -2,7 +2,6 @@ package com.bluedot.domain.algorithm;
 
 import cn.hutool.core.util.ReflectUtil;
 import com.bluedot.domain.algorithm.exception.AlgorithmException;
-import com.bluedot.domain.algorithm.po.PersistantAlgorithm;
 import com.bluedot.domain.file.AbstractDomainFile;
 import com.bluedot.domain.file.model.JavaFile;
 import com.bluedot.domain.file.model.PythonFile;

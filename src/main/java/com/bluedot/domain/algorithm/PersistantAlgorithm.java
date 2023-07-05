@@ -1,9 +1,9 @@
-package com.bluedot.domain.algorithm.po;
+package com.bluedot.domain.algorithm;
 
-import com.bluedot.domain.algorithm.AlgorithmStatus;
 import com.bluedot.domain.rbac.User;
-import org.hibernate.annotations.CreationTimestamp;
+import com.bluedot.infrastructure.repository.enumeration.AlgorithmStatus;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,18 +11,23 @@ import java.util.Date;
 /**
  * @author Jason
  * @creationDate 2023/06/22 - 17:19
+ *
+ * TODO JPA存在查询数据量过多的情况，比如查询算法类会把创建者对应的用户类一并查询出来，这中过度查询不可避免的会浪费一些数据库资源
  */
 @Entity
+@Table(name="algorithm")
 public class PersistantAlgorithm {
     /**
      * 算法的唯一标识，格式为：【java_12345678】
      */
     @Id
+//    @Column(name = "algo_id")
     private String algoId;
 
     /**
      * 算法的名称，是展示给用户看的名称，而不是类名或是文件名。
      */
+    @Column(name = "algo_name", nullable = false)
     private String algoName;
 
     /**
@@ -35,7 +40,6 @@ public class PersistantAlgorithm {
      * 这里就暂时选择将两个业务放在一个类里吧
      */
     @OneToOne
-//    @JoinColumn(name = "creatorEmail")
     private User creator;
 
     /**
@@ -47,7 +51,8 @@ public class PersistantAlgorithm {
      * 创建日期
      */
     @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
+    @CreatedDate
+    @Column(name = "create_date", nullable = false)
     private Date createDate;
 
     /**
@@ -55,6 +60,7 @@ public class PersistantAlgorithm {
      */
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
+    @Column(name = "modify_date", nullable = false)
     private Date modifyDate;
 
     /**
@@ -66,6 +72,7 @@ public class PersistantAlgorithm {
     /**
      * 算法应用场景类型
      */
+    @Column(name = "algo_type", nullable = false)
     private String algoType;
 
     public PersistantAlgorithm() {

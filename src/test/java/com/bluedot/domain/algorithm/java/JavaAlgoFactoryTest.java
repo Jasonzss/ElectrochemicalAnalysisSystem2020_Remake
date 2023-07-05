@@ -2,7 +2,7 @@ package com.bluedot.domain.algorithm.java;
 
 import com.bluedot.domain.algorithm.Algorithm;
 import com.bluedot.domain.algorithm.exception.AlgorithmException;
-import com.bluedot.domain.algorithm.po.PersistantAlgorithm;
+import com.bluedot.domain.algorithm.PersistantAlgorithm;
 import com.bluedot.infrastructure.repository.AlgorithmRepository;
 import org.junit.After;
 import org.junit.Assert;

@@ -3,7 +3,7 @@ package com.bluedot.domain.algorithm.python;
 import com.bluedot.domain.algorithm.AlgoFactory;
 import com.bluedot.domain.algorithm.Algorithm;
 import com.bluedot.domain.algorithm.exception.AlgorithmException;
-import com.bluedot.domain.algorithm.po.PersistantAlgorithm;
+import com.bluedot.domain.algorithm.PersistantAlgorithm;
 import com.bluedot.domain.file.model.PythonFile;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.repository.AlgorithmRepository;
