@@ -66,6 +66,12 @@ public enum CommonErrorCode implements ErrorCode {
     E_4001(4001,HttpStatus.SC_INTERNAL_SERVER_ERROR, "执行数据处理算法失败"),
     E_4002(4002,HttpStatus.SC_BAD_REQUEST, "无法解析文件内容"),
     E_4003(4003,HttpStatus.SC_BAD_REQUEST, "文件出现异常"),
+    E_4004(4004,HttpStatus.SC_BAD_REQUEST, "文件内容格式异常导致无法正常读取"),
+
+    /**
+     * 持久层异常
+     */
+    E_5001(4004,HttpStatus.SC_BAD_REQUEST, "解/压缩数据失败"),
 
     ;
 

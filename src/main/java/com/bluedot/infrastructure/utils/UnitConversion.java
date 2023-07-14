@@ -21,7 +21,7 @@ public class UnitConversion {
      * @return BigDecimal - 转换后的值
      */
     public static BigDecimal conversion(BigDecimal value, String original, String need) {
-        return conversion(value, getUnitEnum(original), getUnitEnum(need));
+        return conversion(value, getUnit(original), getUnit(need));
     }
 
     /**
@@ -34,7 +34,7 @@ public class UnitConversion {
      * @return BigDecimal - 转换后的值
      */
     public static BigDecimal conversion(BigDecimal value, String original, String need, final Integer scale) {
-        return conversion(value, getUnitEnum(original), getUnitEnum(need), scale);
+        return conversion(value, getUnit(original), getUnit(need), scale);
     }
 
     /**
@@ -79,16 +79,17 @@ public class UnitConversion {
      * @param unit - 计量单位名称
      * @return UnitsEnum - 计量单位
      */
-    public static Unit getUnitEnum(String unit) {
+    public static Unit getUnit(String unit) {
         if (!isEmpty(unit)) {
             for (Unit unitEnum : Unit.values()) {
                 for (String possibleName : unitEnum.possibleNames) {
-                    if (possibleName.equals(unit.toLowerCase())) {
+                    if (possibleName.equals(unit)) {
                         return unitEnum;
                     }
                 }
             }
         }
+
         return Unit.UN_KNOWN;
     }
 
@@ -103,7 +104,7 @@ public class UnitConversion {
             if (unit.category != null) {
                 String categoryName = unit.category.name;
                 Map<String, String> lengthMap = new HashMap<>(2);
-                lengthMap.put("code", unit.getUnits());
+                lengthMap.put("code", unit.getUnit());
                 lengthMap.put("name", unit.getDescription());
                 List<Map<String, String>> list = listMap.get(categoryName);
                 if (list == null || list.isEmpty()) {
@@ -244,7 +245,7 @@ public class UnitConversion {
             return category;
         }
 
-        public String getUnits() {
+        public String getUnit() {
             return units;
         }
 
