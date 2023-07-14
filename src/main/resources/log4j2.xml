@@ -13,7 +13,7 @@
     <!--logger定义-->
     <Loggers>
         <!--rootLogger配置-->
-        <root level="debug">
+        <root level="info">
             <AppenderRef ref="Console"/>
         </root>
     </Loggers>
