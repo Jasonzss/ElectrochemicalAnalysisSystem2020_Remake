@@ -21,7 +21,8 @@ public class PersistantAlgorithm {
      * 算法的唯一标识，格式为：【java_12345678】
      */
     @Id
-//    @Column(name = "algo_id")
+    @Column(name = "algo_id")
+    @GeneratedValue
     private String algoId;
 
     /**

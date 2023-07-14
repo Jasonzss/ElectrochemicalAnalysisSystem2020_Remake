@@ -3,7 +3,7 @@ package com.bluedot.domain.rbac;
 import com.bluedot.infrastructure.repository.converter.GenderConverter;
 import com.bluedot.infrastructure.repository.converter.PasswordConverter;
 import com.bluedot.infrastructure.repository.enumeration.UserStatus;
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -49,9 +49,16 @@ public class User {
     @Column(name = "user_img", nullable = false)
     private String userImg;
 
-    @CreatedDate
-    @Column(name = "registration_date", nullable = false)
+    @CreationTimestamp
+    @Column(name = "registration_date")
     private Date registrationDate;
+
+    public User() {
+    }
+
+    public User(String email) {
+        this.email = email;
+    }
 
     public String getEmail() {
         return email;
