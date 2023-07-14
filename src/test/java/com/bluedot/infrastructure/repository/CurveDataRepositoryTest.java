@@ -37,8 +37,8 @@ public class CurveDataRepositoryTest extends BaseTest {
         data.setMaterialName("这是物质名称");
         data.setMaterialSolubility(new Quantity(BigDecimal.ONE, UnitConversion.Unit.MOL_M));
         data.setBufferSolution(new BufferSolution(10000007));
-        data.setOriginalIp(BigDecimal.TEN);
-        data.setOriginalEp(BigDecimal.ZERO);
+        data.setOriginalIp(new Quantity(BigDecimal.TEN, UnitConversion.Unit.AMP_A));
+        data.setOriginalEp(new Quantity(BigDecimal.ZERO, UnitConversion.Unit.VOL_V));
         data.setMaterialType(new MaterialType(1));
         Curve curve = new Curve();
         ArrayList<Point> points = new ArrayList<>();
@@ -51,6 +51,6 @@ public class CurveDataRepositoryTest extends BaseTest {
     public void testSave(){
         CurveData save = repository.save(data);
         log.info(save.toString());
-        repository.delete(save);
+//        repository.delete(save);
     }
 }
