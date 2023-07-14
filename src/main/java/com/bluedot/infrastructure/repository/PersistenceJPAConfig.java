@@ -1,5 +1,6 @@
 package com.bluedot.infrastructure.repository;
 
+import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -58,6 +59,7 @@ public class PersistenceJPAConfig {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "validate");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.id.new_generator_mappings", "false");
         return properties;
     }
 }

@@ -1,5 +1,6 @@
 package com.bluedot.infrastructure.repository;
 
+import com.bluedot.BaseTest;
 import com.bluedot.domain.algorithm.PersistantAlgorithm;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,14 +16,11 @@ import java.util.Optional;
  * @author Jason
  * @creationDate 2023/07/05 - 16:29
  */
-public class AlgorithmRepositoryTest {
-    private static final Logger log = LoggerFactory.getLogger(SpringApp.class);
-
+public class AlgorithmRepositoryTest extends BaseTest {
     AlgorithmRepository repository;
 
     @Before
     public void init(){
-        @SuppressWarnings("resource")
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringApp.class);
         repository = context.getBean(AlgorithmRepository.class);
     }

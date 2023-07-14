@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * @Author Jason
@@ -40,5 +41,9 @@ public class BaseTest {
         System.out.println("-----------------------------");
         System.out.println(request.getEntity().getContentType());
 //        System.out.println(IoUtil.readUtf8(request.getEntity().getContent()));
+    }
+
+    public static void printOptional(Optional<?> op){
+        op.ifPresent(o -> System.out.println(o.toString()));
     }
 }

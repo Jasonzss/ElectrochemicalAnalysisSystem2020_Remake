@@ -60,6 +60,12 @@ public enum CommonErrorCode implements ErrorCode {
     E_3019(3019,HttpStatus.SC_INTERNAL_SERVER_ERROR, "算法对象构建失败，请检查算法构造器"),
     E_3020(3020,HttpStatus.SC_INTERNAL_SERVER_ERROR, "远程调用python算法失败"),
 
+    /**
+     * 波形处理模块异常
+     */
+    E_4001(4001,HttpStatus.SC_INTERNAL_SERVER_ERROR, "执行数据处理算法失败"),
+    E_4002(4002,HttpStatus.SC_BAD_REQUEST, "无法解析文件内容"),
+    E_4003(4003,HttpStatus.SC_BAD_REQUEST, "文件出现异常"),
 
     ;
 
