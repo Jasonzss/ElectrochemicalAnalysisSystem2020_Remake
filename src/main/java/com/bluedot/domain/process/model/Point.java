@@ -43,4 +43,12 @@ public class Point {
     public void setY(Quantity y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "Point{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

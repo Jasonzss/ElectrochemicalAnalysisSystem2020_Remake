@@ -91,7 +91,7 @@ public class CurveProcessTable {
         CurveData data = new CurveData();
         data.setMaterialType(new MaterialType(materialTypeId));
         data.setMaterialName(materialName);
-        data.setMaterialSolubility(new Quantity(BigDecimal.valueOf(materialSolubility), UnitConversion.getUnitEnum(unit)));
+        data.setMaterialSolubility(new Quantity(BigDecimal.valueOf(materialSolubility), UnitConversion.getUnit(unit)));
         data.setBufferSolution(new BufferSolution(bufferSolutionId));
         data.setPh(ph);
         data.setDescription(desc);

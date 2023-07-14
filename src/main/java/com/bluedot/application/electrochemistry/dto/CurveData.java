@@ -47,9 +47,11 @@ public class CurveData {
     )
     private Curve originalPointsData;
     @Column(name = "original_ep", nullable = false)
-    private BigDecimal originalEp;
+    @Convert(converter = QuantityConverter.class)
+    private Quantity originalEp;
     @Column(name = "original_ip", nullable = false)
-    private BigDecimal originalIp;
+    @Convert(converter = QuantityConverter.class)
+    private Quantity originalIp;
 
     @Embedded
     @AttributeOverrides(
@@ -57,9 +59,11 @@ public class CurveData {
     )
     private Curve newestPointsData;
     @Column(name = "newest_ep")
-    private BigDecimal newestEp;
+    @Convert(converter = QuantityConverter.class)
+    private Quantity newestEp;
     @Column(name = "newest_ip")
-    private BigDecimal newestIp;
+    @Convert(converter = QuantityConverter.class)
+    private Quantity newestIp;
 
     @ManyToOne
     @JoinColumn(name = "buffer_solution_id", referencedColumnName = "id", nullable = false)
@@ -134,20 +138,36 @@ public class CurveData {
         this.originalPointsData = originalPointsData;
     }
 
-    public BigDecimal getOriginalEp() {
+    public Quantity getOriginalEp() {
         return originalEp;
     }
 
-    public void setOriginalEp(BigDecimal originalEp) {
+    public void setOriginalEp(Quantity originalEp) {
         this.originalEp = originalEp;
     }
 
-    public BigDecimal getOriginalIp() {
+    public Quantity getOriginalIp() {
         return originalIp;
     }
 
-    public void setOriginalIp(BigDecimal originalIp) {
+    public void setOriginalIp(Quantity originalIp) {
         this.originalIp = originalIp;
+    }
+
+    public Quantity getNewestEp() {
+        return newestEp;
+    }
+
+    public void setNewestEp(Quantity newestEp) {
+        this.newestEp = newestEp;
+    }
+
+    public Quantity getNewestIp() {
+        return newestIp;
+    }
+
+    public void setNewestIp(Quantity newestIp) {
+        this.newestIp = newestIp;
     }
 
     public Curve getNewestPointsData() {
@@ -158,21 +178,6 @@ public class CurveData {
         this.newestPointsData = newestPointsData;
     }
 
-    public BigDecimal getNewestEp() {
-        return newestEp;
-    }
-
-    public void setNewestEp(BigDecimal newestEp) {
-        this.newestEp = newestEp;
-    }
-
-    public BigDecimal getNewestIp() {
-        return newestIp;
-    }
-
-    public void setNewestIp(BigDecimal newestIp) {
-        this.newestIp = newestIp;
-    }
 
     public BufferSolution getBufferSolution() {
         return bufferSolution;

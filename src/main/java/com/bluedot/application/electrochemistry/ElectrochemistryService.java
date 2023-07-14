@@ -9,6 +9,8 @@ import com.bluedot.domain.rbac.User;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.exception.CustomException;
 import com.bluedot.infrastructure.repository.CurveDataRepository;
+import com.bluedot.infrastructure.utils.Quantity;
+import com.bluedot.infrastructure.utils.UnitConversion;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.lang3.StringUtils;
 
@@ -57,21 +59,32 @@ public class ElectrochemistryService {
             String line = br.readLine();
             boolean flag = false;
 
-            while(!flag && !StringUtils.isEmpty(line)){
-                if(line.startsWith("Ep = ")){
-                    ep = new BigDecimal(line.substring(line.indexOf("Ep = "), line.length()-1));
-                } else if(line.startsWith("ip = ")){
-                    ip = new BigDecimal(line.substring(line.indexOf("ip = "), line.length()-1));
-                    flag = true;
+            while(!flag){
+                if(!StringUtils.isEmpty(line)){
+                    if(line.startsWith("Ep = ")){
+                        line = line.trim();
+                        ep = new BigDecimal(line.substring(line.indexOf("Ep = ")+5, line.length()-1));
+                    } else if(line.startsWith("ip = ")){
+                        line = line.trim();
+                        ip = new BigDecimal(line.substring(line.indexOf("ip = ")+5, line.length()-1));
+                        flag = true;
+                    }
                 }
 
                 line = br.readLine();
             }
 
+            line = br.readLine();
+            flag = false;
             while (line != null){
-                if (!StringUtils.isEmpty(line)){
-                    String[] split = line.split(", ");
-                    points.add(new Point(new BigDecimal(split[0]), new BigDecimal(split[1])));
+                if(flag){
+                    line = line.trim();
+                    if (StringUtils.isNoneBlank(line)){
+                        String[] split = line.split(", ");
+                        points.add(new Point(new BigDecimal(split[0]), new BigDecimal(split[1])));
+                    }
+                } else if (line.trim().contains("Potential/V, Current/A")){
+                    flag = true;
                 }
 
                 //不断读取每一行
@@ -87,11 +100,20 @@ public class ElectrochemistryService {
             curve.setPoints(points);
 
             curveData.setOriginalPointsData(curve);
-            curveData.setOriginalEp(ep);
-            curveData.setOriginalIp(ip);
+            curveData.setOriginalEp(new Quantity(ep, UnitConversion.Unit.VOL_V));
+            curveData.setOriginalIp(new Quantity(ip, UnitConversion.Unit.AMP_A));
+        } catch (NumberFormatException e) {
+            throw new CustomException(CommonErrorCode.E_4004);
         } catch (IOException e) {
-            e.printStackTrace();
             throw new CustomException(CommonErrorCode.E_4003);
         }
+    }
+
+    public CurveDataRepository getCurveDataRepository() {
+        return curveDataRepository;
+    }
+
+    public void setCurveDataRepository(CurveDataRepository curveDataRepository) {
+        this.curveDataRepository = curveDataRepository;
     }
 }

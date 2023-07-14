@@ -31,4 +31,11 @@ public class Curve {
     public LinearEquation getEquation() {
         return equation;
     }
+
+    @Override
+    public String toString() {
+        return "Curve{" +
+                "points=" + points +
+                '}';
+    }
 }
