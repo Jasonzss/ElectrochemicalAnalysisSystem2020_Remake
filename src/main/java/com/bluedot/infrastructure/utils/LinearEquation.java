@@ -20,6 +20,11 @@ public class LinearEquation {
         B = b;
     }
 
+    public LinearEquation(Double a, Double b) {
+        A = BigDecimal.valueOf(a);
+        B = BigDecimal.valueOf(b);
+    }
+
     public BigDecimal getA() {
         return A;
     }

@@ -3,7 +3,7 @@ package com.bluedot.infrastructure.utils;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import com.bluedot.infrastructure.utils.UnitConversion.Unit;
+import com.bluedot.infrastructure.utils.UnitUtil.Unit;
 
 /**
  * @author Jason
@@ -20,8 +20,18 @@ public class Quantity {
         this.unit = unit;
     }
 
+    public Quantity(String quantity) {
+        String[] a = quantity.split(" ");
+        value = new BigDecimal(a[0]);
+        unit = UnitUtil.getUnit(a[1]);
+    }
+
     public BigDecimal getValue() {
         return value;
+    }
+
+    public BigDecimal getValue(Unit unit){
+        return this.unit.getRate().multiply(value).divide(unit.getRate(), RoundingMode.HALF_UP);
     }
 
     public void setValue(BigDecimal value) {

@@ -8,10 +8,9 @@ import java.util.*;
 /**
  * 计量单位换算
  *
- * @author XinLau
+ * @author jason
  */
-public class UnitConversion {
-
+public class UnitUtil {
     /**
      * 四舍五入
      *
