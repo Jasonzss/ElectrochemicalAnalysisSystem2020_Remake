@@ -1,7 +1,7 @@
 package com.bluedot.domain.process.model;
 
 import com.bluedot.infrastructure.utils.Quantity;
-import com.bluedot.infrastructure.utils.UnitConversion;
+import com.bluedot.infrastructure.utils.UnitUtil;
 
 import java.math.BigDecimal;
 
@@ -12,8 +12,8 @@ import java.math.BigDecimal;
  * 波形图点位
  */
 public class Point {
-    private static final UnitConversion.Unit DEFAULT_CURRENT_UNIT = UnitConversion.Unit.AMP_A;
-    private static final UnitConversion.Unit DEFAULT_VOLTAGE_UNIT = UnitConversion.Unit.VOL_V;
+    private static final UnitUtil.Unit DEFAULT_CURRENT_UNIT = UnitUtil.Unit.AMP_A;
+    private static final UnitUtil.Unit DEFAULT_VOLTAGE_UNIT = UnitUtil.Unit.VOL_V;
 
     private Quantity x;
     private Quantity y;
@@ -26,6 +26,16 @@ public class Point {
     public Point(BigDecimal x, BigDecimal y){
         this.x = new Quantity(x, DEFAULT_VOLTAGE_UNIT);
         this.y = new Quantity(y, DEFAULT_CURRENT_UNIT);
+    }
+
+    public Point(Double x, Double y){
+        this.x = new Quantity(BigDecimal.valueOf(x), DEFAULT_VOLTAGE_UNIT);
+        this.y = new Quantity(BigDecimal.valueOf(y), DEFAULT_CURRENT_UNIT);
+    }
+
+    public Point(String x, String y){
+        this.x = new Quantity(new BigDecimal(x), DEFAULT_VOLTAGE_UNIT);
+        this.y = new Quantity(new BigDecimal(y), DEFAULT_CURRENT_UNIT);
     }
 
     public Quantity getX() {

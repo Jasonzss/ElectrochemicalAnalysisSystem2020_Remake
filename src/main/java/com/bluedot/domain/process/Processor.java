@@ -13,7 +13,7 @@ public interface Processor {
      * @param data 待处理的点位数据
      * @param algoId 算法id
      * @param algoParams 调用算法的参数
-     * @return 处理后的数据
+     * @return 处理后的数据,double[i][0]为电压（横坐标），double[i][1]为电流（纵坐标）
      */
     Double[][] processData(Double[][] data, String algoId, Object... algoParams);
 

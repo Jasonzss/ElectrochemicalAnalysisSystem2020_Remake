@@ -19,6 +19,7 @@ public class SimpleProcessor implements Processor{
     public Double[][] processData(Double[][] data, String algoId, Object... algoParams) {
         try{
             Algorithm algorithm = manager.getAlgorithm(algoId);
+            //TODO 算法类方法的输入和输出都是Object，这就使得算法模块充满了不确定性，且使用起来会留下许多坑
             return (Double[][]) algorithm.execute(data, algoParams);
         }catch (ClassCastException e){
             throw new ProcessException(CommonErrorCode.E_4001);

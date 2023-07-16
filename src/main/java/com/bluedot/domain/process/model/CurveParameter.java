@@ -1,7 +1,7 @@
 package com.bluedot.domain.process.model;
 
 import com.bluedot.infrastructure.utils.Quantity;
-import com.bluedot.infrastructure.utils.UnitConversion.Unit;
+import com.bluedot.infrastructure.utils.UnitUtil.Unit;
 
 import java.math.BigDecimal;
 

@@ -11,14 +11,19 @@ import java.util.List;
 /**
  * @author Jason
  * @creationDate 2023/07/11 - 16:53
+ *
  */
 @Embeddable
 public class Curve {
     @Convert(converter = PointsConverter.class)
-    private List<Point> points;
+    private List<Point> points = null;
 
-    @Transient
-    private LinearEquation equation;
+    public Curve() {
+    }
+
+    public Curve(List<Point> points) {
+        this.points = points;
+    }
 
     public List<Point> getPoints() {
         return points;
@@ -26,10 +31,6 @@ public class Curve {
 
     public void setPoints(List<Point> points) {
         this.points = points;
-    }
-
-    public LinearEquation getEquation() {
-        return equation;
     }
 
     @Override
