@@ -110,4 +110,8 @@ public abstract class AbstractDomainFile implements DomainFile {
     public long lastModified(){
         return getFile().lastModified();
     }
+
+    public String getFilePath(){
+        return file.getAbsolutePath();
+    }
 }
