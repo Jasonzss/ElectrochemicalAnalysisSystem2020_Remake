@@ -1,5 +1,9 @@
 package com.bluedot.domain.analysis;
 
+import com.bluedot.application.electrochemistry.dto.CurveData;
+import com.bluedot.domain.analysis.model.AnalyzedData;
+import com.bluedot.infrastructure.utils.LinearEquation;
+
 import java.util.List;
 
 /**
@@ -11,15 +15,16 @@ public interface Analyst {
     /**
      * 对选取的数据使用指定算法进行建模
      * @param ExpDataIds 数据集
-     * @param modelAlgorithm 建模算法
+     * @param modelAlgorithmId 建模算法的id
      * @return 构建好的模型
      */
-    Model getModel(List<String> ExpDataIds, String modelAlgorithm);
+    LinearEquation getModel(List<CurveData> ExpDataIds, String modelAlgorithmId);
 
     /**
-     * 对模型进行分析、评价
-     * @param model 模型
-     * @return 分析结果
+     * 对模型产生的数据进行分析，得到模型的分析参数
+     * @param train 训练集
+     * @param test 测试集
+     * @return 模型分析结果
      */
-    AnalysisResult analysis(Model model);
+    AnalysisResult analysis(AnalyzedData train, AnalyzedData test);
 }
