@@ -59,6 +59,7 @@ public enum CommonErrorCode implements ErrorCode {
     E_3018(3018,HttpStatus.SC_INTERNAL_SERVER_ERROR, "算法已过期或尚未初始化"),
     E_3019(3019,HttpStatus.SC_INTERNAL_SERVER_ERROR, "算法对象构建失败，请检查算法构造器"),
     E_3020(3020,HttpStatus.SC_INTERNAL_SERVER_ERROR, "远程调用python算法失败"),
+    E_3021(3021,HttpStatus.SC_INTERNAL_SERVER_ERROR, "算法返回参数类型不对"),
 
     /**
      * 波形处理模块异常
