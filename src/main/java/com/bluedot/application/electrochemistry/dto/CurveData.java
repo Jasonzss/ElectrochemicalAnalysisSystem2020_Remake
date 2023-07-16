@@ -1,6 +1,7 @@
 package com.bluedot.application.electrochemistry.dto;
 
 import com.bluedot.domain.process.model.Curve;
+import com.bluedot.domain.process.model.CurveParameter;
 import com.bluedot.domain.rbac.User;
 import com.bluedot.infrastructure.repository.converter.QuantityConverter;
 import com.bluedot.infrastructure.repository.data_object.BufferSolution;
@@ -90,6 +91,13 @@ public class CurveData {
     @Column(name = "modify_date")
     private Date modifyDate;
 
+    public Quantity getIp(){
+        if(newestIp != null){
+            return newestIp;
+        }
+        return originalIp;
+    }
+
     public Integer getCurveDataId() {
         return curveDataId;
     }
@@ -177,7 +185,6 @@ public class CurveData {
     public void setNewestPointsData(Curve newestPointsData) {
         this.newestPointsData = newestPointsData;
     }
-
 
     public BufferSolution getBufferSolution() {
         return bufferSolution;
