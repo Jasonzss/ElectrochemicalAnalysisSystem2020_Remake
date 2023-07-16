@@ -2,7 +2,7 @@ package com.bluedot.application.electrochemistry;
 
 import com.bluedot.BaseTest;
 import com.bluedot.application.electrochemistry.dto.CurveData;
-import com.bluedot.application.electrochemistry.vo.CurveProcessTable;
+import com.bluedot.application.electrochemistry.vo.CurveFileProcessTable;
 import com.bluedot.infrastructure.repository.CurveDataRepository;
 import com.bluedot.infrastructure.repository.SpringApp;
 import org.apache.commons.fileupload.FileItem;
@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 public class ElectrochemistryServiceTest extends BaseTest {
     ElectrochemistryService service;
-    CurveProcessTable table = new CurveProcessTable();
+    CurveFileProcessTable table = new CurveFileProcessTable();
     CurveDataRepository repository;
 
     @Before
