@@ -12,6 +12,7 @@ import com.bluedot.domain.algorithm.AlgorithmManager;
 import com.bluedot.domain.analysis.AnalysisResult;
 import com.bluedot.domain.analysis.Analyst;
 import com.bluedot.domain.analysis.model.AnalyzedData;
+import com.bluedot.domain.analysis.model.QuantitySet;
 import com.bluedot.domain.file.model.ModelAnalysisGraphFile;
 import com.bluedot.domain.process.Processor;
 import com.bluedot.domain.process.model.Curve;
@@ -34,6 +35,8 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.util.Timeout;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.io.BufferedReader;
@@ -49,6 +52,7 @@ import java.util.concurrent.TimeUnit;
  * @author Jason
  * @creationDate 2023/07/11 - 16:00
  */
+@Service
 public class ElectrochemistryService {
     private static final UnitUtil.Unit DEFAULT_CURRENT_UNIT = UnitUtil.Unit.AMP_A;
     private static final UnitUtil.Unit DEFAULT_SOLUBILITY_UNIT = UnitUtil.Unit.MOL_M;

@@ -77,7 +77,7 @@ public class AnalyzedModelReport {
     @Column(nullable = false)
     private BigDecimal rpd;
 
-    @Column(name = "desc")
+    @Column(name = "description")
     private String reportDesc;
 
     public Integer getReport_id() {
