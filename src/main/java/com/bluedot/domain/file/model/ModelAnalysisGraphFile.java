@@ -21,6 +21,14 @@ public class ModelAnalysisGraphFile extends AbstractDomainFile {
 
     @Override
     protected String generatePath() {
-        return "src/main/resources/analysis/"+getFileId()+"/";
+        return "web/model_analysis_graph/"+getFileId()+"/";
+    }
+
+    /**
+     * 获取文件在服务上的位置
+     * @return 文件在服务器上的位置
+     */
+    public String getFileUri(){
+        return "model_analysis_graph/"+generateName();
     }
 }
