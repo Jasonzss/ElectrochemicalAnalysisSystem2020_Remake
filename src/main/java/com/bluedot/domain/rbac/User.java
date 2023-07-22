@@ -4,6 +4,7 @@ import com.bluedot.infrastructure.repository.converter.GenderConverter;
 import com.bluedot.infrastructure.repository.converter.PasswordConverter;
 import com.bluedot.infrastructure.repository.enumeration.UserStatus;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Date;
