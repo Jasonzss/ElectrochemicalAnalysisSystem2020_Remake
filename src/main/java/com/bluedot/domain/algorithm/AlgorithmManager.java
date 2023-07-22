@@ -10,6 +10,7 @@ import com.bluedot.infrastructure.repository.AlgorithmRepository;
 import com.bluedot.infrastructure.utils.PojoUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.io.FileNotFoundException;
@@ -23,6 +24,7 @@ import java.util.Optional;
  *
  * TODO 如何做到优雅的映射关系转换 ：算法id 算法实体类 算法工厂类 算法模型文件类 算法文件储存路径
  */
+@Component
 public class AlgorithmManager {
     private static final Logger log = LoggerFactory.getLogger(AlgorithmManager.class);
 
@@ -30,7 +32,7 @@ public class AlgorithmManager {
     private AlgorithmRepository repository;
 
     @Inject
-    private AlgoFactory algoFactory;
+    private SimpleAlgoFactory algoFactory;
 
     /**
      * 查询算法
@@ -140,11 +142,15 @@ public class AlgorithmManager {
         this.repository = repository;
     }
 
-    public AlgoFactory getAlgoFactory() {
+    public static Logger getLog() {
+        return log;
+    }
+
+    public SimpleAlgoFactory getAlgoFactory() {
         return algoFactory;
     }
 
-    public void setAlgoFactory(AlgoFactory algoFactory) {
+    public void setAlgoFactory(SimpleAlgoFactory algoFactory) {
         this.algoFactory = algoFactory;
     }
 }

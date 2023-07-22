@@ -9,6 +9,7 @@ import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.utils.BigDecimalUtil;
 import com.bluedot.infrastructure.utils.LinearEquation;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -19,6 +20,7 @@ import java.util.List;
  * @author Jason
  * @creationDate 2023/07/16 - 15:56
  */
+@Component
 public class SimpleAnalyst implements Analyst{
     @Inject
     private AlgorithmManager manager;

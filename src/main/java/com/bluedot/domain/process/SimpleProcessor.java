@@ -4,6 +4,7 @@ import com.bluedot.domain.algorithm.Algorithm;
 import com.bluedot.domain.algorithm.AlgorithmManager;
 import com.bluedot.domain.process.model.CurveParameter;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
@@ -11,6 +12,7 @@ import javax.inject.Inject;
  * @author Jason
  * @creationDate 2023/07/05 - 22:58
  */
+@Component
 public class SimpleProcessor implements Processor{
     @Inject
     AlgorithmManager manager;

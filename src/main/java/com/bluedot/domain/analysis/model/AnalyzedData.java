@@ -1,7 +1,5 @@
 package com.bluedot.domain.analysis.model;
 
-import com.bluedot.infrastructure.utils.QuantitySet;
-
 /**
  * @author Jason
  * @creationDate 2023/07/16 - 17:53
