@@ -51,6 +51,20 @@ public class Quantity {
         return new Quantity(v, unit);
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Quantity){
+            Quantity o = (Quantity) obj;
+            return UnitUtil.conversion(value, unit, o.getUnit()).compareTo(o.getValue()) == 0;
+        }
+
+        return false;
+    }
 
     @Override
     public String toString() {

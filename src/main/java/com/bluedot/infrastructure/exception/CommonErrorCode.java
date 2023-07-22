@@ -12,6 +12,7 @@ import org.apache.http.HttpStatus;
  * 可能会出现跨模块使用错误的ErrorCode情况
  * 过多的异常挤在一块让人眼花缭乱
  * 所有模块都与这个异常耦合，无法独立出来
+ * 所有的异常都以四位数字为主要表现，阅读代码和使用时不够直观
  *
  * 所以这里应该有更多种类的ErrorCode
  */
@@ -72,7 +73,17 @@ public enum CommonErrorCode implements ErrorCode {
     /**
      * 持久层异常
      */
-    E_5001(4004,HttpStatus.SC_BAD_REQUEST, "解/压缩数据失败"),
+    E_5001(5001,HttpStatus.SC_BAD_REQUEST, "解/压缩数据失败"),
+
+    /**
+     * 用户模块异常
+     */
+    E_6001(6001,HttpStatus.SC_BAD_REQUEST, "用户头像保存失败"),
+    E_6002(6002,HttpStatus.SC_BAD_REQUEST, "该邮箱已注册"),
+    E_6003(6003,HttpStatus.SC_BAD_REQUEST, "用户不存在"),
+    E_6004(6004,HttpStatus.SC_UNAUTHORIZED, "请先登录完成验证"),
+    E_6005(6005,HttpStatus.SC_UNAUTHORIZED, "登陆失败，账号或密码错误"),
+    E_6006(6006,HttpStatus.SC_UNAUTHORIZED, "请先完成验证码验证"),
 
     ;
 

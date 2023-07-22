@@ -1,5 +1,6 @@
 package com.bluedot.infrastructure.repository;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +37,7 @@ public class PersistenceJPAConfig {
     }
     @Bean
     public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/eas_re?useSSL=false&useUnicode=true&characterEncoding=UTF-8");
         dataSource.setUsername("root");
@@ -60,6 +61,7 @@ public class PersistenceJPAConfig {
         properties.setProperty("hibernate.hbm2ddl.auto", "validate");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         properties.setProperty("hibernate.id.new_generator_mappings", "false");
+        properties.setProperty("hibernate.show_sql", "true");
         return properties;
     }
 }
