@@ -12,5 +12,6 @@
   </head>
   <body>
   hello
+  <img src="user_img/default/userImg.jpg">
   </body>
 </html>
