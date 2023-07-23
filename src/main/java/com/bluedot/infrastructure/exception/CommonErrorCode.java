@@ -84,6 +84,7 @@ public enum CommonErrorCode implements ErrorCode {
     E_6004(6004,HttpStatus.SC_UNAUTHORIZED, "请先登录完成验证"),
     E_6005(6005,HttpStatus.SC_UNAUTHORIZED, "登陆失败，账号或密码错误"),
     E_6006(6006,HttpStatus.SC_UNAUTHORIZED, "请先完成验证码验证"),
+    E_6007(6007,HttpStatus.SC_UNAUTHORIZED, "当前没有达到该资源的访问权限"),
 
     ;
 
