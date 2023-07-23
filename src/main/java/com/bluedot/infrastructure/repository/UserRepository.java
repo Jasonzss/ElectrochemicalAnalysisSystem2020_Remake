@@ -2,6 +2,10 @@ package com.bluedot.infrastructure.repository;
 
 import com.bluedot.domain.rbac.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * @Author Jason
@@ -9,4 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Description ：
  */
 public interface UserRepository extends JpaRepository<User, String> {
+    @Modifying
+    @Query("update User u set u.userImg = ?1 where u.email = ?2")
+    User saveUserImage(String uri, String email);
 }
