@@ -5,9 +5,13 @@ import com.bluedot.domain.rbac.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.http.entity.ContentType;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.Encoded;
 import javax.ws.rs.FormParam;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Date;
 
 /**
@@ -21,7 +25,7 @@ public class UserForm {
     public static final String SEX = "sex";
     public static final String BIRTHDAY = "birthday";
     public static final String TEL = "tel";
-    public static final String USER_IMG = "userImg";
+    public static final String USER_IMG = "user-img";
 
     @FormParam(EMAIL)
     private String email;
@@ -37,8 +41,11 @@ public class UserForm {
     @FormParam(TEL)
     private String tel;
 
-    @FormParam(USER_IMG)
-    private FileUpload userImg;
+    @FormDataParam("user-img")
+    private FormDataContentDisposition userImg;
+
+    @FormDataParam("user-img")
+    private InputStream userImgStream;
 
     public String getEmail() {
         return email;
@@ -88,20 +95,24 @@ public class UserForm {
         this.tel = tel;
     }
 
-    public FileUpload getUserImg() {
+    public FormDataContentDisposition getUserImg() {
         return userImg;
     }
 
-    public void setUserImg(FileUpload userImg) {
+    public void setUserImg(FormDataContentDisposition userImg) {
         this.userImg = userImg;
     }
 
-    public FileItem getUserImgFileItem(){
-        if(userImg != null){
-            return userImg.getFileItemFactory().createItem(email+".png", String.valueOf(ContentType.IMAGE_PNG), true, null);
-        }
+    public InputStream getUserImgStream() {
+        return userImgStream;
+    }
 
-        return null;
+    public void setUserImgStream(InputStream userImgStream) {
+        this.userImgStream = userImgStream;
+    }
+
+    public UploadFile getUploadFile(){
+        return userImgStream == null ? null : new UploadFile(userImg, userImgStream);
     }
 
     public User getUserFromForm(){

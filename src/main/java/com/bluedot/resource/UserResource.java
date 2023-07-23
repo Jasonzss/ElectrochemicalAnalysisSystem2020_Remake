@@ -11,9 +11,8 @@ import javax.ws.rs.core.MediaType;
 import java.util.Optional;
 
 /**
- * @Author Jason
- * @CreationDate 2023/05/28 - 14:32
- * @Description ：
+ * @author Jason
+ * @since 2023/05/28 - 14:32
  */
 @Path("user")
 @Produces({"application/json;charset=UTF-8"})
