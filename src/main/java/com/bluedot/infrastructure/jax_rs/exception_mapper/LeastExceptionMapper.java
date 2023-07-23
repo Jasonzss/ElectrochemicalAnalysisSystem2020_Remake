@@ -1,4 +1,4 @@
-package com.bluedot.infrastructure.jax_rs;
+package com.bluedot.infrastructure.jax_rs.exception_mapper;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
