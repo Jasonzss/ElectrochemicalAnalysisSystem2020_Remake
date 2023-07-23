@@ -1,12 +1,10 @@
 package com.bluedot.resource;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.http.HttpUtil;
 import com.bluedot.TestUtil;
-import com.bluedot.infrastructure.jax_rs.CustomExceptionMapper;
-import com.bluedot.infrastructure.jax_rs.LeastExceptionMapper;
+import com.bluedot.infrastructure.jax_rs.exception_mapper.CustomExceptionMapper;
+import com.bluedot.infrastructure.jax_rs.exception_mapper.LeastExceptionMapper;
 import com.bluedot.resource.vo.UserForm;
-import org.apache.hc.core5.http.io.entity.EntityUtils;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
