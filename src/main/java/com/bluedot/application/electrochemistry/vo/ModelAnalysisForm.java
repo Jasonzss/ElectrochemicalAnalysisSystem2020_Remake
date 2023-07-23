@@ -6,7 +6,7 @@ import java.util.List;
  * @author Jason
  * @creationDate 2023/07/14 - 15:19
  */
-public class ModelAnalysisTable {
+public class ModelAnalysisForm {
     private String materialName;
     private String preprocessAlgorithmId;
     private String modelingAlgoId;

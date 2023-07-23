@@ -13,7 +13,7 @@ import java.math.BigDecimal;
  * @author Jason
  * @creationDate 2023/07/13 - 12:31
  */
-public class CurveFileProcessTable {
+public class CurveFileProcessForm {
     private FileItem file;
     private Integer materialTypeId;
     private String materialName;

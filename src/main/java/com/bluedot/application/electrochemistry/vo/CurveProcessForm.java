@@ -14,7 +14,7 @@ import java.util.List;
  * @author Jason
  * @creationDate 2023/07/14 - 16:39
  */
-public class CurveProcessTable {
+public class CurveProcessForm {
     private Integer curveDataId;
     private String materialName;
     //物质溶度，包括了单位，以空格为单位
