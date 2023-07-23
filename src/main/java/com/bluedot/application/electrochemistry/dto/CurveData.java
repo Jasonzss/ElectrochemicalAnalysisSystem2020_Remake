@@ -1,7 +1,6 @@
 package com.bluedot.application.electrochemistry.dto;
 
 import com.bluedot.domain.process.model.Curve;
-import com.bluedot.domain.process.model.CurveParameter;
 import com.bluedot.domain.rbac.User;
 import com.bluedot.infrastructure.repository.converter.QuantityConverter;
 import com.bluedot.infrastructure.repository.data_object.BufferSolution;
@@ -9,10 +8,8 @@ import com.bluedot.infrastructure.repository.data_object.MaterialType;
 import com.bluedot.infrastructure.utils.Quantity;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**
