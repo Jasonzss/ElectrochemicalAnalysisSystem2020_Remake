@@ -4,9 +4,9 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.bluedot.application.electrochemistry.dto.AnalyzedGraphData;
 import com.bluedot.application.electrochemistry.dto.AnalyzedModelReport;
 import com.bluedot.application.electrochemistry.dto.CurveData;
-import com.bluedot.application.electrochemistry.vo.CurveFileProcessTable;
-import com.bluedot.application.electrochemistry.vo.CurveProcessTable;
-import com.bluedot.application.electrochemistry.vo.ModelAnalysisTable;
+import com.bluedot.application.electrochemistry.vo.CurveFileProcessForm;
+import com.bluedot.application.electrochemistry.vo.CurveProcessForm;
+import com.bluedot.application.electrochemistry.vo.ModelAnalysisForm;
 import com.bluedot.domain.algorithm.Algorithm;
 import com.bluedot.domain.algorithm.AlgorithmManager;
 import com.bluedot.domain.analysis.AnalysisResult;
@@ -35,7 +35,6 @@ import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.util.Timeout;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -74,7 +73,7 @@ public class ElectrochemistryService {
     @Inject
     private Analyst analyst;
 
-    public CurveData processFile(CurveFileProcessTable table, String userEmail){
+    public CurveData processFile(CurveFileProcessForm table, String userEmail){
         CurveData curveData = table.generateCurveData();
         curveData.setUser(new User(userEmail));
 
@@ -117,7 +116,7 @@ public class ElectrochemistryService {
      * 保存数据
      * @return 是否保存成功
      */
-    public boolean saveCurveData(CurveProcessTable table){
+    public boolean saveCurveData(CurveProcessForm table){
         CurveData data = table.generateCurveData();
         Optional<CurveData> byId = curveDataRepository.findById(table.getCurveDataId());
         if (byId.isPresent()){
@@ -132,7 +131,7 @@ public class ElectrochemistryService {
     /**
      * 对用户填入的参数进行建模，并对建立出的方程模型进行分析
      */
-    public AnalyzedModelReport modelingAnalysis(ModelAnalysisTable table, String userEmail){
+    public AnalyzedModelReport modelingAnalysis(ModelAnalysisForm table, String userEmail){
         //1. 查询指定的波形数据的波形参数
         List<CurveData> dataList = curveDataRepository.findCurveParameter(table.getDataIds());
 
