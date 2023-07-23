@@ -1,4 +1,4 @@
-package com.bluedot.infrastructure.repository;
+package com.bluedot.infrastructure.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.hibernate.Hibernate;

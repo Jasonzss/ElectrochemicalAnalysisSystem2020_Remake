@@ -1,4 +1,4 @@
-package com.bluedot.infrastructure.repository;
+package com.bluedot.infrastructure.config;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.appender.ConsoleAppender;
@@ -18,7 +18,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {"com.bluedot"})
 @EnableJpaRepositories(basePackages = {"com.bluedot"})
 @EntityScan(basePackages = {"com.bluedot"})
-public class AppConfig {
+public class SpringConfig {
     @Bean
     public LoggerConfig loggerConfig() {
         LoggerConfig loggerConfig = new LoggerConfig();
