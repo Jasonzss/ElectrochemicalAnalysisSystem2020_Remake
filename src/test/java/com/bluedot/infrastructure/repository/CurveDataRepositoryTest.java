@@ -31,7 +31,7 @@ public class CurveDataRepositoryTest extends BaseTest {
         repository = context.getBean(CurveDataRepository.class);
 
         data = new CurveData();
-        data.setUser(new User("456"));
+        data.setUser(new User("2418972236@qq.com"));
         data.setPh(12.2);
         data.setDescription("这是描述");
         data.setMaterialName("这是物质名称");

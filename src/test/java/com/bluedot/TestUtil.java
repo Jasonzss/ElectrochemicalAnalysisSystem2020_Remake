@@ -22,6 +22,7 @@ public class TestUtil {
             log.info(k+":"+v);
         });
 
+        log.info("-------------------------------------------");
         log.info(IoUtil.read((InputStream) response.getEntity(), StandardCharsets.UTF_8));
     }
 }

@@ -2,8 +2,8 @@ package com.bluedot.resource;
 
 import cn.hutool.core.date.DateUtil;
 import com.bluedot.TestUtil;
-import com.bluedot.infrastructure.jax_rs.exception_mapper.CustomExceptionMapper;
-import com.bluedot.infrastructure.jax_rs.exception_mapper.LeastExceptionMapper;
+import com.bluedot.infrastructure.jax_rs.CustomExceptionMapper;
+import com.bluedot.infrastructure.jax_rs.LeastExceptionMapper;
 import com.bluedot.resource.vo.UserForm;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
@@ -25,7 +25,7 @@ import javax.ws.rs.core.Response;
  */
 public class UserResourceTest extends JerseyTest {
     private static final Logger log = LoggerFactory.getLogger(UserResourceTest.class);
-    final String path = "user";
+    final String path = "users";
 
     @Override
     protected Application configure() {
@@ -59,8 +59,21 @@ public class UserResourceTest extends JerseyTest {
     }
 
     @Test
-    public void testPut(){
-
+    public void testGetUserPage(){
+        Response response = target(path).path("/pages").queryParam("page", 0)
+                .queryParam("limit", 2)
+                .request()
+                .get();
+        TestUtil.printResponse(response);
     }
 
+    @Test
+    public void testUpdateUserImg(){
+        Response response = target(path).path("img")
+                .queryParam("page", 1)
+                .queryParam("limit", 2)
+                .request()
+                .get();
+        TestUtil.printResponse(response);
+    }
 }
