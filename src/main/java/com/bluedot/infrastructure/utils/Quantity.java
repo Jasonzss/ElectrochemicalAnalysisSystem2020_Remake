@@ -68,6 +68,6 @@ public class Quantity {
 
     @Override
     public String toString() {
-        return value.toString()+unit.getUnit();
+        return value.toString()+" "+unit.getUnit();
     }
 }
