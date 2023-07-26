@@ -1,6 +1,6 @@
 package com.bluedot.infrastructure.jersey;
 
-import com.bluedot.infrastructure.spring.SubjectFactoryBean;
+import com.bluedot.infrastructure.shiro.SubjectFactoryBean;
 import org.apache.shiro.subject.Subject;
 import org.glassfish.hk2.api.PerLookup;
 
