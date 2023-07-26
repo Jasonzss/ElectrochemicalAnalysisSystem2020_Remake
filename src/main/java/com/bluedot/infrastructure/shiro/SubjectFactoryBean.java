@@ -1,4 +1,4 @@
-package com.bluedot.infrastructure.spring;
+package com.bluedot.infrastructure.shiro;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.converters.AbstractConverter;
