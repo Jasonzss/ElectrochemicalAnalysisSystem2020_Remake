@@ -1,7 +1,10 @@
 package com.bluedot.domain.rbac;
 
+import com.bluedot.infrastructure.json.ResponseEntity;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @Author Jason
@@ -11,7 +14,7 @@ import java.io.Serializable;
 @Entity
 @IdClass(UserRole.class)
 @Table(name = "user_role")
-public class UserRole implements Serializable {
+public class UserRole implements Serializable, ResponseEntity {
     @Id
     private String email;
     @Id
@@ -32,5 +35,18 @@ public class UserRole implements Serializable {
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserRole userRole = (UserRole) o;
+        return Objects.equals(email, userRole.email) && Objects.equals(roleId, userRole.roleId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, roleId);
     }
 }

@@ -1,4 +1,4 @@
-package com.bluedot.infrastructure.jax_rs.exception_mapper;
+package com.bluedot.infrastructure.jax_rs;
 
 import com.bluedot.infrastructure.exception.CustomException;
 import com.bluedot.infrastructure.exception.ErrorCode;

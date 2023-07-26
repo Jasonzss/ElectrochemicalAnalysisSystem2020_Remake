@@ -1,5 +1,7 @@
 package com.bluedot.domain.rbac;
 
+import com.bluedot.infrastructure.json.ResponseEntity;
+
 import javax.persistence.*;
 
 /**
@@ -9,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "role")
-public class Role {
+public class Role implements ResponseEntity {
     @Id
     @GeneratedValue
     @Column(name = "role_id")

@@ -2,6 +2,7 @@ package com.bluedot.application.electrochemistry.dto;
 
 import com.bluedot.domain.process.model.Curve;
 import com.bluedot.domain.rbac.User;
+import com.bluedot.infrastructure.json.ResponseEntity;
 import com.bluedot.infrastructure.repository.converter.QuantityConverter;
 import com.bluedot.infrastructure.repository.data_object.BufferSolution;
 import com.bluedot.infrastructure.repository.data_object.MaterialType;
@@ -18,7 +19,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "curve_data")
-public class CurveData {
+public class CurveData implements ResponseEntity {
     @Id
     @Column(name = "curve_data_id")
     @GeneratedValue

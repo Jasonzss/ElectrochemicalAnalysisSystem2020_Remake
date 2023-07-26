@@ -1,6 +1,7 @@
 package com.bluedot.domain.algorithm;
 
 import com.bluedot.domain.rbac.User;
+import com.bluedot.infrastructure.json.ResponseEntity;
 import com.bluedot.infrastructure.repository.enumeration.AlgorithmStatus;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,7 +17,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="algorithm")
-public class PersistantAlgorithm {
+public class PersistantAlgorithm implements ResponseEntity {
     /**
      * 算法的唯一标识，格式为：【java_12345678】
      */

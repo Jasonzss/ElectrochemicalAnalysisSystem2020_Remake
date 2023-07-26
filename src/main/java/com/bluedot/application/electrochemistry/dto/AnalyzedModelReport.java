@@ -3,6 +3,7 @@ package com.bluedot.application.electrochemistry.dto;
 import com.bluedot.domain.algorithm.PersistantAlgorithm;
 import com.bluedot.domain.analysis.model.AnalyzedData;
 import com.bluedot.domain.rbac.User;
+import com.bluedot.infrastructure.json.ResponseEntity;
 import com.bluedot.infrastructure.repository.converter.AnalyzedDataConverter;
 import com.bluedot.infrastructure.repository.converter.LinearEquationConverter;
 import com.bluedot.infrastructure.utils.LinearEquation;
@@ -16,7 +17,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "report")
-public class AnalyzedModelReport {
+public class AnalyzedModelReport implements ResponseEntity {
     @Id
     @Column(name = "report_id")
     @GeneratedValue

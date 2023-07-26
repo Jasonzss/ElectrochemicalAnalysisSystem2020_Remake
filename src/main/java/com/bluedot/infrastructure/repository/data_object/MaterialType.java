@@ -1,5 +1,7 @@
 package com.bluedot.infrastructure.repository.data_object;
 
+import com.bluedot.infrastructure.json.ResponseEntity;
+
 import javax.persistence.*;
 
 /**
@@ -8,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "material_type")
-public class MaterialType {
+public class MaterialType implements ResponseEntity {
     @Id
     @GeneratedValue
     private Integer id;

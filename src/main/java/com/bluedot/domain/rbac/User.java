@@ -1,10 +1,11 @@
 package com.bluedot.domain.rbac;
 
+import com.bluedot.infrastructure.json.ResponseEntity;
+import com.bluedot.infrastructure.json.ResponseIgnore;
 import com.bluedot.infrastructure.repository.converter.GenderConverter;
 import com.bluedot.infrastructure.repository.converter.PasswordConverter;
 import com.bluedot.infrastructure.repository.enumeration.UserStatus;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,7 +17,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements ResponseEntity {
     public static final String GENDER_BOY = "男";
     public static final String GENDER_GIRL = "女";
 
@@ -28,9 +29,11 @@ public class User {
 
     @Convert(converter = PasswordConverter.class)
     @Column(nullable = false)
+    @ResponseIgnore
     private String password;
 
     @Column(nullable = false)
+    @ResponseIgnore
     private String salt;
 
     @Enumerated(EnumType.ORDINAL)

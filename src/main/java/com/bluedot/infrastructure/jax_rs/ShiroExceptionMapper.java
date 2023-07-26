@@ -1,4 +1,4 @@
-package com.bluedot.infrastructure.jax_rs.exception_mapper;
+package com.bluedot.infrastructure.jax_rs;
 
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
