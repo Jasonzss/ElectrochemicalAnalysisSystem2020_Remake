@@ -41,7 +41,7 @@ public class UserService {
     @Inject
     private CaptchaDiagramService captchaDiagramService;
 
-    public void registerUser(UserForm form){
+    public User registerUser(UserForm form){
         User user = form.getUserFromForm();
         String password = user.getPassword();
 
@@ -64,20 +64,20 @@ public class UserService {
             }
 
             //保存用户
-            repository.save(user);
+            return repository.save(user);
         }else {
             throw new UserException(CommonErrorCode.E_6002);
         }
     }
 
-    public void updateUser(UserForm form){
+    public User updateUser(UserForm form){
         User user = form.getUserFromForm();
 
         Optional<User> byId = repository.findById(user.getEmail());
         if (byId.isPresent()) {
             User u = byId.get();
             PojoUtil.updatePojo(user, u);
-            repository.save(u);
+            return repository.save(u);
         }else {
             throw new UserException(CommonErrorCode.E_6003);
         }
