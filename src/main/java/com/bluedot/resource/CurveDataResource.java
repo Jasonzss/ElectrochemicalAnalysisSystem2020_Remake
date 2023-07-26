@@ -3,6 +3,8 @@ package com.bluedot.resource;
 import com.bluedot.application.electrochemistry.dto.CurveData;
 import com.bluedot.application.electrochemistry.vo.CurveFileProcessForm;
 import com.bluedot.application.electrochemistry.vo.CurveProcessForm;
+import com.bluedot.resource.dto.PageData;
+import com.bluedot.resource.vo.PageInfo;
 
 import java.util.List;
 
@@ -24,6 +26,14 @@ public class CurveDataResource {
     }
 
     public CurveData updateCurveData(CurveProcessForm form){
+        return null;
+    }
+
+    public PageData<CurveData> getCurveDataPage(PageInfo pageInfo){
+        return null;
+    }
+
+    public PageData<CurveData> getCurveDataPageByEmail(String email, PageInfo pageInfo){
         return null;
     }
 }

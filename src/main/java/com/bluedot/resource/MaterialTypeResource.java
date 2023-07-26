@@ -1,6 +1,8 @@
 package com.bluedot.resource;
 
 import com.bluedot.infrastructure.repository.data_object.MaterialType;
+import com.bluedot.resource.dto.PageData;
+import com.bluedot.resource.vo.PageInfo;
 
 import java.util.List;
 
@@ -23,5 +25,13 @@ public class MaterialTypeResource {
 
     public void deleteMaterialType(List<Integer> ids){
 
+    }
+
+    public PageData<MaterialType> getMaterialTypePage(PageInfo pageInfo){
+        return null;
+    }
+
+    public PageData<MaterialType> getMaterialTypePageByEmail(String email, PageInfo pageInfo){
+        return null;
     }
 }

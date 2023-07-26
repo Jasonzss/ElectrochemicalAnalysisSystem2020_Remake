@@ -1,6 +1,8 @@
 package com.bluedot.resource;
 
 import com.bluedot.infrastructure.repository.data_object.BufferSolution;
+import com.bluedot.resource.dto.PageData;
+import com.bluedot.resource.vo.PageInfo;
 
 import java.util.List;
 
@@ -23,5 +25,13 @@ public class BufferSolutionResource {
 
     public void deleteBufferSolution(List<Integer> ids){
 
+    }
+
+    public PageData<BufferSolution> getBufferSolutionPage(PageInfo pageInfo){
+        return null;
+    }
+
+    public PageData<BufferSolution> getBufferSolutionPageByEmail(String email, PageInfo pageInfo){
+        return null;
     }
 }

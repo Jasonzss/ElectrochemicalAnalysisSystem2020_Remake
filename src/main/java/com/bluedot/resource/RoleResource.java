@@ -2,9 +2,7 @@ package com.bluedot.resource;
 
 import com.bluedot.domain.rbac.Role;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.HttpMethod;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import java.util.List;
 
 /**
@@ -18,7 +16,8 @@ public class RoleResource {
     }
 
     @GET
-    public Role getRole(int roleId){
+    @Path("{id}")
+    public Role getRole(@PathParam("id") int roleId){
         return null;
     }
 

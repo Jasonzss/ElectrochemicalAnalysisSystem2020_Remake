@@ -1,19 +1,22 @@
 package com.bluedot.resource.vo;
 
-import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.PageUtil;
-import cn.hutool.db.sql.Order;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import javax.ws.rs.QueryParam;
-import java.util.Arrays;
 
 /**
  * 改编自 {@link cn.hutool.db.Page}
  *
  * @author Jason
  * @creationDate 2023/07/23 - 23:11
+ *
+ * 目前仅支持单字段排序
  */
-public class Page {
+public class PageInfo {
     public static final int DEFAULT_PAGE_SIZE = 20;
 
     /**
@@ -29,12 +32,18 @@ public class Page {
 
     /**
      * 排序字段
-     * key 代表着用于排序的字段，Direction代表正序或是反序
      */
-    private Order[] orders;
+    @QueryParam("sort")
+    private String sort;
 
-    public static Page of(int pageNumber, int pageSize) {
-        return new Page(pageNumber, pageSize);
+    /**
+     * 排序方式（正序还是反序）
+     */
+    @QueryParam("direction")
+    private String direction;
+
+    public static PageInfo of(int pageNumber, int pageSize) {
+        return new PageInfo(pageNumber, pageSize);
     }
 
     // ---------------------------------------------------------- Constructor start
@@ -44,7 +53,7 @@ public class Page {
      *
      * @since 4.5.16
      */
-    public Page() {
+    public PageInfo() {
         this(0, DEFAULT_PAGE_SIZE);
     }
 
@@ -54,7 +63,7 @@ public class Page {
      * @param pageNumber 页码，0表示第一页
      * @param pageSize   每页结果数
      */
-    public Page(int pageNumber, int pageSize) {
+    public PageInfo(int pageNumber, int pageSize) {
         this.pageNumber = Math.max(pageNumber, 0);
         this.pageSize = pageSize <= 0 ? DEFAULT_PAGE_SIZE : pageSize;
     }
@@ -63,12 +72,14 @@ public class Page {
      * 构造
      *
      * @param pageNumber 页码，0表示第一页
-     * @param pageSize   每页结果数
-     * @param order      排序对象
+     * @param pageSize 每页结果数
+     * @param sort 排序字段
+     * @param direction 正序 或 反序
      */
-    public Page(int pageNumber, int pageSize, Order order) {
+    public PageInfo(int pageNumber, int pageSize, String sort, String direction) {
         this(pageNumber, pageSize);
-        this.orders = new Order[]{order};
+        this.sort = sort;
+        this.direction = direction;
     }
     // ---------------------------------------------------------- Constructor start
 
@@ -106,31 +117,21 @@ public class Page {
         this.pageSize = (pageSize <= 0) ? DEFAULT_PAGE_SIZE : pageSize;
     }
 
-    /**
-     * @return 排序
-     */
-    public Order[] getOrders() {
-        return this.orders;
+    public String getSort() {
+        return sort;
     }
 
-    /**
-     * 设置排序
-     *
-     * @param orders 排序
-     */
-    public void setOrder(Order... orders) {
-        this.orders = orders;
+    public void setSort(String sort) {
+        this.sort = sort;
     }
 
-    /**
-     * 设置排序
-     *
-     * @param orders 排序
-     */
-    public void addOrder(Order... orders) {
-        this.orders = ArrayUtil.append(this.orders, orders);
+    public String getDirection() {
+        return direction;
     }
-    // ---------------------------------------------------------- Getters and Setters end
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
 
     /**
      * @return 开始位置
@@ -156,6 +157,8 @@ public class Page {
         return PageUtil.getEnd(this.pageNumber, this.pageSize);
     }
 
+    // ---------------------------------------------------------- Getters and Setters end
+
     /**
      * 开始位置和结束位置<br>
      * 例如：
@@ -173,8 +176,24 @@ public class Page {
         return PageUtil.transToStartEnd(pageNumber, pageSize);
     }
 
+    public Pageable getPageable(){
+        if(StringUtils.isEmpty(sort)){
+            return PageRequest.of(pageNumber, pageSize);
+        }else {
+            if (StringUtils.isEmpty(direction)){
+                direction = Sort.Direction.ASC.toString();
+            }
+            return PageRequest.of(pageNumber, pageSize, Sort.by(Sort.Direction.valueOf(direction),sort));
+        }
+    }
+
     @Override
     public String toString() {
-        return "Page [page=" + pageNumber + ", pageSize=" + pageSize + ", order=" + Arrays.toString(orders) + "]";
+        return "PageInfo{" +
+                "pageNumber=" + pageNumber +
+                ", pageSize=" + pageSize +
+                ", sort='" + sort + '\'' +
+                ", direction='" + direction + '\'' +
+                '}';
     }
 }
