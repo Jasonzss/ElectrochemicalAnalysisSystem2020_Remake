@@ -11,7 +11,6 @@ import com.bluedot.resource.vo.UserForm;
 import org.apache.shiro.subject.Subject;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.springframework.data.domain.Page;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -48,7 +47,7 @@ public class UserResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public User addUser(@BeanParam UserForm form){
+    public User registerUser(@BeanParam UserForm form){
         return userService.registerUser(form);
     }
 
@@ -64,18 +63,20 @@ public class UserResource {
         return PageData.of(repository.findAll(pageInfo.getPageable()));
     }
 
-//    /**
-//     * 用户头像的查询是属于用户资源的子资源，所以将用户头像相关方法移入这里
-//     * @param fileData 图片文件相关信息
-//     * @param fileStream 图片文件IO流
-//     * @param subject shiro认证对象
-//     */
-//    @PUT
-//    @Consumes({MediaType.MULTIPART_FORM_DATA})
-//    @Path("img")
-//    public void updateUserImg(@FormDataParam("file") InputStream fileStream,
-//                              @FormDataParam("file") FormDataContentDisposition fileData,
-//                              @Auth Subject subject){
-//        userService.updateUserImg((String) subject.getPrincipal(), new UploadFile(fileData, fileStream));
-//    }
+    /**
+     * 用户头像的查询是属于用户资源的子资源，所以将用户头像相关方法移入这里
+     * @param fileData 图片文件相关信息
+     * @param fileStream 图片文件IO流
+     * @param subject shiro认证对象
+     */
+    @PUT
+    @Consumes({MediaType.MULTIPART_FORM_DATA})
+    @Path("img")
+    public String updateUserImg(@FormDataParam("file") InputStream fileStream,
+                              @FormDataParam("file") FormDataContentDisposition fileData,
+                              @Auth Subject subject){
+
+        return userService.updateUserImg((String) subject.getPrincipal(),
+                new UploadFile(fileData, fileStream));
+    }
 }

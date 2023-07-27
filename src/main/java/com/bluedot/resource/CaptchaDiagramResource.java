@@ -1,6 +1,7 @@
 package com.bluedot.resource;
 
 import com.bluedot.application.CaptchaDiagramService;
+import org.apache.http.entity.ContentType;
 
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
@@ -23,13 +24,15 @@ public class CaptchaDiagramResource {
     private CaptchaDiagramService service;
 
     @GET
+    @Produces("image/png")
     public Response getCaptchaDiagram(){
         UUID uuid = UUID.randomUUID();
         Image captchaDiagram = service.getCaptchaDiagram(uuid);
         NewCookie newCookie = new NewCookie("captcha-id", uuid.toString());
 
         return Response.ok((StreamingOutput) output ->
-                ImageIO.write((RenderedImage) captchaDiagram, "jpg", output))
+                ImageIO.write((RenderedImage) captchaDiagram, "png", output))
+                .header("Content-type", ContentType.IMAGE_PNG)
                 .header("Content-disposition", "attachment;filename=captcha-diagram.jpg")
                 .header("Cache-Control", "no-cache")
                 .status(200)
@@ -37,11 +40,11 @@ public class CaptchaDiagramResource {
                 .build();
     }
 
-    @DELETE
+    @POST
     public Response verifyCaptchaDiagram(@FormParam("verify-code") String code,
                                          @CookieParam("captcha-id") String captchaId){
         if(service.verifyCode(code, captchaId)){
-            return Response.status(200).build();
+            return Response.status(200).entity("验证成功").type(MediaType.APPLICATION_JSON).build();
         }
         return Response.status(400).entity("验证码输入错误").type(MediaType.APPLICATION_JSON).build();
     }

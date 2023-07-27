@@ -1,6 +1,9 @@
 package com.bluedot.resource;
 
+import com.bluedot.application.CaptchaDiagramService;
 import com.bluedot.application.UserService;
+import com.bluedot.domain.rbac.exception.UserException;
+import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.shiro.Auth;
 
 import javax.inject.Inject;
@@ -24,11 +27,19 @@ public class SessionResource {
     @Inject
     private UserService userService;
 
+    @Inject
+    private CaptchaDiagramService captchaDiagramService;
+
     @POST
-    public String getSession(@FormParam("email") String email, @FormParam("password") String password,
-                               @DefaultValue ("false") @FormParam("remember-me") boolean rememberMe,
-                               @CookieParam("captcha-id") String captchaId){
-        userService.login(email, password, rememberMe, captchaId);
+    public String login(@FormParam("email") String email,
+                        @FormParam("password") String password,
+                        @DefaultValue ("false") @FormParam("remember-me") boolean rememberMe,
+                        @CookieParam("captcha-id") String captchaId){
+        if (captchaDiagramService.isCaptchaPassed(captchaId)) {
+            userService.login(email, password, rememberMe);
+        }else {
+            throw new UserException(CommonErrorCode.E_6006);
+        }
         return "登陆成功！";
     }
 
@@ -41,5 +52,21 @@ public class SessionResource {
 
         session.invalidate();
         return "登出成功！";
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public CaptchaDiagramService getCaptchaDiagramService() {
+        return captchaDiagramService;
+    }
+
+    public void setCaptchaDiagramService(CaptchaDiagramService captchaDiagramService) {
+        this.captchaDiagramService = captchaDiagramService;
     }
 }
