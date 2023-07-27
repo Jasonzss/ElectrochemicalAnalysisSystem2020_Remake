@@ -13,5 +13,5 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends JpaRepository<User, String> {
     @Modifying
     @Query("update User u set u.userImg = ?1 where u.email = ?2")
-    User saveUserImage(String uri, String email);
+    void saveUserImage(String uri, String email);
 }

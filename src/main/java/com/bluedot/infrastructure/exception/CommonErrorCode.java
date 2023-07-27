@@ -15,6 +15,8 @@ import org.apache.http.HttpStatus;
  * 所有的异常都以四位数字为主要表现，阅读代码和使用时不够直观
  *
  * 所以这里应该有更多种类的ErrorCode
+ *
+ * 针对框架抛出的异常是否也可以做业务上的统一处理？
  */
 public enum CommonErrorCode implements ErrorCode {
 
@@ -85,6 +87,7 @@ public enum CommonErrorCode implements ErrorCode {
     E_6005(6005,HttpStatus.SC_UNAUTHORIZED, "登陆失败，账号或密码错误"),
     E_6006(6006,HttpStatus.SC_UNAUTHORIZED, "请先完成验证码验证"),
     E_6007(6007,HttpStatus.SC_UNAUTHORIZED, "当前没有达到该资源的访问权限"),
+    E_6008(6008,HttpStatus.SC_BAD_REQUEST, "修改头像失败，图片文件上传异常"),
 
     ;
 
