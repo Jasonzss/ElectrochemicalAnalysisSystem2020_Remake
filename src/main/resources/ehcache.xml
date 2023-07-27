@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache name="es">
 
-    <diskStore path="com.bluedot.infrastructure.cache.diskstore"/>
+    <diskStore path="src/main/java/com/bluedot/infrastructure/cache/diskstore"/>
 
     <!-- 重复登录记录缓存 锁定10分钟 -->
     <cache name="passwordRetryCache"
