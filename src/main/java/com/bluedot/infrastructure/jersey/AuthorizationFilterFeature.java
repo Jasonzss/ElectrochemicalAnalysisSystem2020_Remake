@@ -6,6 +6,7 @@ import javax.ws.rs.Priorities;
 import javax.ws.rs.container.DynamicFeature;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.FeatureContext;
+import javax.ws.rs.ext.Provider;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +16,10 @@ import java.util.List;
 /**
  * Wraps {@link AuthorizationFilter filters} around JAX-RS resources that are annotated with Shiro annotations.
  * 注册shiro注解之于JAX-RS资源的管理功能
+ *
+ * shiro注解 权限验证 过滤器
  */
+@Provider
 public class AuthorizationFilterFeature implements DynamicFeature {
 
     /**

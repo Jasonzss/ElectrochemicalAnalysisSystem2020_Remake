@@ -5,11 +5,9 @@ import com.bluedot.infrastructure.exception.CommonErrorCode;
 import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.annotation.*;
 import org.apache.shiro.authz.aop.*;
-import org.glassfish.jersey.server.internal.process.MappableException;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
-import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Collections;

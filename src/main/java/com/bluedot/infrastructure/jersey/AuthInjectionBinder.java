@@ -6,12 +6,14 @@ import org.glassfish.hk2.api.TypeLiteral;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 import javax.inject.Singleton;
+import javax.ws.rs.ext.Provider;
 
 /**
  * Enable injection with the {@link Auth} annotation.
  * <p>
  * 启用 {@link Auth} 注解的方法入参注入
  */
+@Provider
 public class AuthInjectionBinder extends AbstractBinder {
 
     /**
