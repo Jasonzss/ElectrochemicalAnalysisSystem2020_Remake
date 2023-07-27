@@ -17,6 +17,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.io.InputStream;
 import java.util.Optional;
 import java.util.UUID;
@@ -38,9 +39,11 @@ public class UserService {
     @Inject
     private UserRepository repository;
 
-    @Inject
-    private CaptchaDiagramService captchaDiagramService;
-
+    /**
+     * 注册用户
+     * @param form 用户注册表单
+     * @return 注册成功后的用户
+     */
     public User registerUser(UserForm form){
         User user = form.getUserFromForm();
         String password = user.getPassword();
@@ -83,27 +86,37 @@ public class UserService {
         }
     }
 
-    public void login(String email, String password, boolean rememberMe, String captchaId){
-        if (captchaDiagramService.isCaptchaPassed(captchaId)) {
-            try{
-                UsernamePasswordToken token = new UsernamePasswordToken(email, password);
-                token.setRememberMe(rememberMe);
-                subject.login(token);
-            }catch (AuthenticationException e){
-                throw new UserException(CommonErrorCode.E_6005);
-            }
-        }else {
-            throw new UserException(CommonErrorCode.E_6006);
+    public void login(String email, String password, boolean rememberMe){
+        try{
+            UsernamePasswordToken token = new UsernamePasswordToken(email, password);
+            token.setRememberMe(rememberMe);
+            subject.login(token);
+        }catch (AuthenticationException e){
+            throw new UserException(CommonErrorCode.E_6005);
         }
     }
 
-    public void updateUserImg(String email, UploadFile userImg) {
+    /**
+     * 修改用户头像
+     * <p>
+     *     使用Repository的自定义修改方法需要加上注解 Transactional
+     * </p>
+     * @param email 邮箱
+     * @param userImg 修改后的头像图片文件
+     * @return 修改后图片的uri
+     */
+    @Transactional
+    public String updateUserImg(String email, UploadFile userImg) {
         InputStream userImgStream = userImg.getUserImgStream();
         if(userImgStream != null){
             UserImageFile imageFile = new UserImageFile(email);
             imageFile.updateFile(userImgStream);
-            repository.saveUserImage(imageFile.getFileUri(), email);
+            String uri = imageFile.getFileUri();
+
+            repository.saveUserImage(uri, email);
+            return uri;
         }
+        throw new UserException(CommonErrorCode.E_6008);
     }
 
 
@@ -121,13 +134,5 @@ public class UserService {
 
     public void setRepository(UserRepository repository) {
         this.repository = repository;
-    }
-
-    public CaptchaDiagramService getCaptchaDiagramService() {
-        return captchaDiagramService;
-    }
-
-    public void setCaptchaDiagramService(CaptchaDiagramService captchaDiagramService) {
-        this.captchaDiagramService = captchaDiagramService;
     }
 }
