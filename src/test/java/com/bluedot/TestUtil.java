@@ -17,6 +17,7 @@ public class TestUtil {
     private static final Logger log = LoggerFactory.getLogger(TestUtil.class);
 
     public static void printResponse(Response response){
+        log.info(response.getStatusInfo().getStatusCode()+" "+response.getStatusInfo().getReasonPhrase());
         MultivaluedMap<String, Object> headers = response.getHeaders();
         headers.forEach((k, v)->{
             log.info(k+":"+v);

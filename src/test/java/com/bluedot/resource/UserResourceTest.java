@@ -5,6 +5,8 @@ import com.bluedot.TestUtil;
 import com.bluedot.infrastructure.jax_rs.CustomExceptionMapper;
 import com.bluedot.infrastructure.jax_rs.LeastExceptionMapper;
 import com.bluedot.resource.vo.UserForm;
+import org.glassfish.jersey.media.multipart.*;
+import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
@@ -14,27 +16,16 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation.Builder;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.Form;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
+import javax.ws.rs.ext.MessageBodyWriter;
+import java.io.File;
 
 /**
  * @author Jason
  * @creationDate 2023/07/21 - 17:37
  */
-public class UserResourceTest extends JerseyTest {
-    private static final Logger log = LoggerFactory.getLogger(UserResourceTest.class);
+public class UserResourceTest extends BaseJerseyTest {
     final String path = "users";
-
-    @Override
-    protected Application configure() {
-        enable(TestProperties.LOG_TRAFFIC);
-        enable(TestProperties.DUMP_ENTITY);
-        ResourceConfig resourceConfig = new ResourceConfig(UserResource.class, CustomExceptionMapper.class, LeastExceptionMapper.class);
-        resourceConfig.packages("com.bluedot");
-        return resourceConfig;
-    }
 
     @Test
     public void testGet(){
@@ -45,14 +36,14 @@ public class UserResourceTest extends JerseyTest {
     }
 
     @Test
-    public void testPost(){
+    public void testRegisterUser(){
         final Form form = new Form();
-        form.param(UserForm.EMAIL, "54321@test.com");
-        form.param(UserForm.USERNAME, "测试名称");
-        form.param(UserForm.BIRTHDAY, DateUtil.now());
-        form.param(UserForm.TEL, "10086");
-        form.param(UserForm.PASSWORD, "123456aa.");
-        form.param(UserForm.SEX, "男");
+        form.param(UserForm.EMAIL, EMAIL);
+        form.param(UserForm.USERNAME, USERNAME);
+        form.param(UserForm.BIRTHDAY, BIRTHDAY);
+        form.param(UserForm.TEL, TEL);
+        form.param(UserForm.PASSWORD, PASSWORD);
+        form.param(UserForm.SEX, SEX);
 
         Response post = target(path).request().post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
         TestUtil.printResponse(post);
@@ -69,11 +60,21 @@ public class UserResourceTest extends JerseyTest {
 
     @Test
     public void testUpdateUserImg(){
+        Cookie cookie = loginAsSuperManager();
+
+        File img = new File("src\\test\\resources\\hanako.png");
+
+        FileDataBodyPart part = new FileDataBodyPart("file", img);
+
+        FormDataMultiPart multiPart = new FormDataMultiPart();
+        multiPart.bodyPart(part);
+        multiPart.setContentDisposition(part.getContentDisposition());
+
         Response response = target(path).path("img")
-                .queryParam("page", 1)
-                .queryParam("limit", 2)
                 .request()
-                .get();
+                .cookie(cookie)
+                .put(Entity.entity(multiPart, multiPart.getMediaType()));
+
         TestUtil.printResponse(response);
     }
 }
