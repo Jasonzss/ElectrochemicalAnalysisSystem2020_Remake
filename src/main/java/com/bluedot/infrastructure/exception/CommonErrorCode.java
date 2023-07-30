@@ -89,6 +89,11 @@ public enum CommonErrorCode implements ErrorCode {
     E_6007(6007,HttpStatus.SC_UNAUTHORIZED, "当前没有达到该资源的访问权限"),
     E_6008(6008,HttpStatus.SC_BAD_REQUEST, "修改头像失败，图片文件上传异常"),
 
+    /**
+     * Resource模块异常
+     */
+    E_7001(7001,HttpStatus.SC_NOT_FOUND, "请求资源不存在"),
+
     ;
 
     private final int code;
