@@ -1,12 +1,13 @@
 package com.bluedot.application;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.bluedot.domain.file.model.UserImageFile;
 import com.bluedot.domain.rbac.User;
 import com.bluedot.domain.rbac.exception.UserException;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.repository.UserRepository;
 import com.bluedot.infrastructure.repository.enumeration.UserStatus;
-import com.bluedot.infrastructure.utils.PojoUtil;
 import com.bluedot.resource.vo.UploadFile;
 import com.bluedot.resource.vo.UserForm;
 import org.apache.shiro.authc.AuthenticationException;
@@ -79,7 +80,7 @@ public class UserService {
         Optional<User> byId = repository.findById(user.getEmail());
         if (byId.isPresent()) {
             User u = byId.get();
-            PojoUtil.updatePojo(user, u);
+            BeanUtil.copyProperties(user, u, CopyOptions.create(User.class, true));
             return repository.save(u);
         }else {
             throw new UserException(CommonErrorCode.E_6003);
