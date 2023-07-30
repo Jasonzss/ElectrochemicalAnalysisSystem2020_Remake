@@ -21,7 +21,7 @@ public class AnalyzedModelReport implements ResponseEntity {
     @Id
     @Column(name = "report_id")
     @GeneratedValue
-    private Integer report_id;
+    private Integer reportId;
 
     private String title;
 
@@ -81,12 +81,12 @@ public class AnalyzedModelReport implements ResponseEntity {
     @Column(name = "description")
     private String reportDesc;
 
-    public Integer getReport_id() {
-        return report_id;
+    public Integer getReportId() {
+        return reportId;
     }
 
-    public void setReport_id(Integer report_id) {
-        this.report_id = report_id;
+    public void setReportId(Integer reportId) {
+        this.reportId = reportId;
     }
 
     public String getTitle() {
