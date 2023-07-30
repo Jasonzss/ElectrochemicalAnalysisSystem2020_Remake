@@ -9,7 +9,7 @@ import org.junit.Test;
  * @creationDate 2023/06/26 - 17:16
  */
 public class PojoUtilTest extends BaseTest {
-    private static class User{
+    public static class User{
         private Integer a;
         private String b;
 

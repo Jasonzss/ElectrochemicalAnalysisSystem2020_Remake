@@ -1,8 +1,11 @@
 package com.bluedot.hello;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.io.file.FileReader;
+import com.bluedot.BaseTest;
 import com.google.common.collect.Lists;
 import org.junit.Test;
 
@@ -15,7 +18,36 @@ import java.util.List;
  * @CreationDate 2023/05/29 - 22:01
  * @Description ：
  */
-public class HelloHutool {
+public class HelloHutool extends BaseTest {
+    private static class User{
+        private Integer a;
+        private String b;
+
+        public Integer getA() {
+            return a;
+        }
+
+        public void setA(Integer a) {
+            this.a = a;
+        }
+
+        public String getB() {
+            return b;
+        }
+
+        public void setB(String b) {
+            this.b = b;
+        }
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "a=" + a +
+                    ", b='" + b + '\'' +
+                    '}';
+        }
+    }
+
     @Test
     public void testDateUtil(){
         long timeMillis = System.currentTimeMillis();
@@ -60,5 +92,43 @@ public class HelloHutool {
         IoUtil.copy(sis, fos);
         fos.close();
         file1.deleteOnExit();
+    }
+
+    @Test
+    public void testBeanUtil1(){
+        //源对象
+        User u1 = new User();
+        //目标对象
+        User u2 = new User();
+
+        u1.setA(1);
+        u1.setB(null);
+
+        u2.setA(2);
+        u2.setB("User2的属性");
+
+        BeanUtil.copyProperties(u1, u2);
+
+        log.info(u1.toString());    //User{a=1, b='null'}
+        log.info(u2.toString());    //User{a=1, b='null'} 源对象的所有字段都将覆盖目标对象，包括null
+    }
+
+    @Test
+    public void testBeanUtil2(){
+        //源对象
+        User u1 = new User();
+        //目标对象
+        User u2 = new User();
+
+        u1.setA(1);
+        u1.setB(null);
+
+        u2.setA(2);
+        u2.setB("User2的属性");
+
+        BeanUtil.copyProperties(u1, u2, CopyOptions.create(User.class, true));
+
+        log.info(u1.toString());    //User{a=1, b='null'}
+        log.info(u2.toString());    //User{a=1, b='User2的属性'} 源对象中只有非null的字段才会去覆盖目标对象的字段
     }
 }
