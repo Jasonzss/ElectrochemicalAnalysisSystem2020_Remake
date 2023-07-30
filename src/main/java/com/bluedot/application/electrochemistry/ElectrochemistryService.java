@@ -116,16 +116,15 @@ public class ElectrochemistryService {
      * 保存数据
      * @return 是否保存成功
      */
-    public boolean saveCurveData(CurveProcessForm table){
+    public CurveData saveCurveData(CurveProcessForm table){
         CurveData data = table.generateCurveData();
         Optional<CurveData> byId = curveDataRepository.findById(table.getCurveDataId());
         if (byId.isPresent()){
             CurveData d = byId.get();
             PojoUtil.updatePojo(data, d);
-            curveDataRepository.save(d);
-            return true;
+            return curveDataRepository.save(d);
         }
-        return false;
+        return data;
     }
 
     /**
@@ -169,8 +168,8 @@ public class ElectrochemistryService {
             InputStream testGraphIs = getGraphInputStream(testGraph);
             InputStream trainGraphIs = getGraphInputStream(trainGraph);
 
-            ModelAnalysisGraphFile testFile = new ModelAnalysisGraphFile(save.getReport_id(), true);
-            ModelAnalysisGraphFile trainFile = new ModelAnalysisGraphFile(save.getReport_id(), false);
+            ModelAnalysisGraphFile testFile = new ModelAnalysisGraphFile(save.getReportId(), true);
+            ModelAnalysisGraphFile trainFile = new ModelAnalysisGraphFile(save.getReportId(), false);
 
             testFile.updateFile(testGraphIs);
             trainFile.updateFile(trainGraphIs);
