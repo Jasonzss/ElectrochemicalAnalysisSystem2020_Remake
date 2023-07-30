@@ -3,6 +3,7 @@ package com.bluedot.domain.rbac;
 import com.bluedot.infrastructure.json.ResponseEntity;
 
 import javax.persistence.*;
+import javax.ws.rs.FormParam;
 
 /**
  * @Author Jason
@@ -15,11 +16,14 @@ public class Permission implements ResponseEntity {
     @Id
     @GeneratedValue
     @Column(name = "permission_id")
+    @FormParam("permission-id")
     private Integer permissionId;
 
     @Column(name = "permission_name", nullable = false, unique = true)
+    @FormParam("permission-name")
     private String permissionName;
 
+    @FormParam("description")
     private String description;
 
     public Integer getPermissionId() {
