@@ -7,18 +7,21 @@ import com.bluedot.application.electrochemistry.vo.CurveProcessForm;
 import com.bluedot.domain.rbac.User;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.repository.CurveDataRepository;
+import com.bluedot.infrastructure.shiro.Auth;
 import com.bluedot.resource.dto.PageData;
 import com.bluedot.resource.vo.PageInfo;
 import org.apache.shiro.subject.Subject;
 import org.springframework.data.domain.Example;
 
 import javax.inject.Inject;
+import javax.ws.rs.*;
 import java.util.List;
 
 /**
  * @author Jason
  * @creationDate 2023/07/18 - 10:16
  */
+@Path("curve-data")
 public class CurveDataResource {
     @Inject
     private CurveDataRepository repository;
@@ -26,27 +29,34 @@ public class CurveDataResource {
     @Inject
     private ElectrochemistryService service;
 
-    public CurveData getCurveData(int curveDataId){
+    @GET
+    @Path("{id}")
+    public CurveData getCurveData(@PathParam("id") int curveDataId){
         return repository.findById(curveDataId).orElseThrow(new ResourceException(CommonErrorCode.E_7001));
     }
 
-    public CurveData addCurveData(CurveFileProcessForm form, Subject subject){
+    @POST
+    public CurveData addCurveData(@BeanParam CurveFileProcessForm form,@Auth Subject subject){
         return service.processFile(form, (String) subject.getPrincipal());
     }
 
-    public void deleteCurveData(List<Integer> ids){
+    @DELETE
+    public void deleteCurveData(@QueryParam("id") List<Integer> ids){
         repository.deleteAllById(ids);
     }
 
-    public CurveData updateCurveData(CurveProcessForm form){
+    @PUT
+    public CurveData updateCurveData(@BeanParam CurveProcessForm form){
         return service.saveCurveData(form);
     }
 
-    public PageData<CurveData> getCurveDataPage(PageInfo pageInfo){
+    @Path("pages")
+    public PageData<CurveData> getCurveDataPage(@BeanParam PageInfo pageInfo){
         return PageData.of(repository.findAll(pageInfo.getPageable()));
     }
 
-    public PageData<CurveData> getCurveDataPageByEmail(String email, PageInfo pageInfo){
+    @Path("pages/{email}")
+    public PageData<CurveData> getCurveDataPageByEmail(@PathParam("email") String email,@BeanParam PageInfo pageInfo){
         User user = new User(email);
         CurveData data = new CurveData();
         data.setUser(user);

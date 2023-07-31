@@ -8,29 +8,36 @@ import com.bluedot.resource.dto.PageData;
 import com.bluedot.resource.vo.PageInfo;
 
 import javax.inject.Inject;
+import javax.ws.rs.*;
 import java.util.List;
 
 /**
  * @author Jason
  * @creationDate 2023/07/18 - 10:19
  */
+@Path("material-type")
 public class MaterialTypeResource {
     @Inject
     private MaterialTypeRepository repository;
 
-    public MaterialType getMaterialType(int id){
+    @GET
+    @Path("{id}")
+    public MaterialType getMaterialType(@PathParam("id") int id){
         return repository.findById(id).orElseThrow(new ResourceException(CommonErrorCode.E_7001));
     }
 
-    public MaterialType addMaterialType(MaterialType materialType){
+    @POST
+    public MaterialType addMaterialType(@BeanParam MaterialType materialType){
         return repository.save(materialType);
     }
 
-    public MaterialType updateMaterialType(MaterialType materialType){
+    @PUT
+    public MaterialType updateMaterialType(@BeanParam MaterialType materialType){
         return ResourceUtil.updateResource(materialType, materialType.getId(), repository);
     }
 
-    public void deleteMaterialType(List<Integer> ids){
+    @DELETE
+    public void deleteMaterialType(@QueryParam("id") List<Integer> ids){
         repository.deleteAllById(ids);
     }
 

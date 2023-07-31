@@ -9,29 +9,36 @@ import com.bluedot.resource.dto.PageData;
 import com.bluedot.resource.vo.PageInfo;
 
 import javax.inject.Inject;
+import javax.ws.rs.*;
 import java.util.List;
 
 /**
  * @author Jason
  * @creationDate 2023/07/18 - 10:19
  */
+@Path("buffer-solution")
 public class BufferSolutionResource {
     @Inject
     private BufferSolutionRepository repository;
 
-    public BufferSolution getBufferSolution(int id){
+    @GET
+    @Path("{id}")
+    public BufferSolution getBufferSolution(@PathParam("id") int id){
         return repository.findById(id).orElseThrow(new ResourceException(CommonErrorCode.E_7001));
     }
 
-    public BufferSolution addBufferSolution(BufferSolution bufferSolution){
+    @POST
+    public BufferSolution addBufferSolution(@BeanParam BufferSolution bufferSolution){
         return repository.save(bufferSolution);
     }
 
-    public BufferSolution updateBufferSolution(BufferSolution bufferSolution){
+    @PUT
+    public BufferSolution updateBufferSolution(@BeanParam BufferSolution bufferSolution){
         return ResourceUtil.updateResource(bufferSolution, bufferSolution.getId(), repository);
     }
 
-    public void deleteBufferSolution(List<Integer> ids){
+    @DELETE
+    public void deleteBufferSolution(@QueryParam("id") List<Integer> ids){
         repository.deleteAllById(ids);
     }
 

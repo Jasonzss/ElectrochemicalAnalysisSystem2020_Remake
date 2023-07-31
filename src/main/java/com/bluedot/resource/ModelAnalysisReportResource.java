@@ -2,26 +2,26 @@ package com.bluedot.resource;
 
 import com.bluedot.application.electrochemistry.ElectrochemistryService;
 import com.bluedot.application.electrochemistry.dto.AnalyzedModelReport;
-import com.bluedot.application.electrochemistry.vo.CurveProcessForm;
 import com.bluedot.application.electrochemistry.vo.ModelAnalysisForm;
 import com.bluedot.domain.rbac.User;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.repository.AnalyzedModelReportRepository;
+import com.bluedot.infrastructure.shiro.Auth;
 import com.bluedot.infrastructure.utils.ResourceUtil;
 import com.bluedot.resource.dto.PageData;
 import com.bluedot.resource.vo.PageInfo;
 import org.apache.shiro.subject.Subject;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Pageable;
 
 import javax.inject.Inject;
-import javax.ws.rs.BeanParam;
+import javax.ws.rs.*;
 import java.util.List;
 
 /**
  * @author Jason
  * @creationDate 2023/07/18 - 10:16
  */
+@Path("report")
 public class ModelAnalysisReportResource {
     @Inject
     private AnalyzedModelReportRepository repository;
@@ -29,28 +29,34 @@ public class ModelAnalysisReportResource {
     @Inject
     private ElectrochemistryService service;
 
-    public AnalyzedModelReport getReport(int reportId){
+    @GET
+    @Path("{id}")
+    public AnalyzedModelReport getReport(@PathParam("id") int reportId){
         return repository.findById(reportId).orElseThrow(new ResourceException(CommonErrorCode.E_7001));
     }
 
-    public AnalyzedModelReport addReport(ModelAnalysisForm form, Subject subject){
+    @POST
+    public AnalyzedModelReport addReport(@BeanParam ModelAnalysisForm form,@Auth Subject subject){
         return service.modelingAnalysis(form, (String) subject.getPrincipal());
     }
 
+    @DELETE
     public void deleteReport(List<Integer> reportIds){
         repository.deleteAllById(reportIds);
     }
 
+    @PUT
     public AnalyzedModelReport updateReport(@BeanParam AnalyzedModelReport report){
         return ResourceUtil.updateResource(report, report.getReportId(), repository);
     }
 
-
-    public PageData<AnalyzedModelReport> getReportPage(PageInfo pageInfo){
+    @Path("pages")
+    public PageData<AnalyzedModelReport> getReportPage(@BeanParam PageInfo pageInfo){
         return PageData.of(repository.findAll(pageInfo.getPageable()));
     }
 
-    public PageData<AnalyzedModelReport> getReportPageByEmail(String email, PageInfo pageInfo){
+    @Path("pages/{email}")
+    public PageData<AnalyzedModelReport> getReportPageByEmail(@PathParam("email") String email,@BeanParam PageInfo pageInfo){
         User user = new User(email);
         AnalyzedModelReport report = new AnalyzedModelReport();
         report.setUser(user);

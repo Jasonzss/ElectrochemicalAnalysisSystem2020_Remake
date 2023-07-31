@@ -47,8 +47,8 @@ public class UserResource {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public User registerUser(@BeanParam UserForm form){
-        return userService.registerUser(form);
+    public User registerUser(@BeanParam UserForm form, @FormParam("registry-code") String registryCode){
+        return userService.registerUser(form, registryCode);
     }
 
     @PUT
@@ -78,5 +78,28 @@ public class UserResource {
 
         return userService.updateUserImg((String) subject.getPrincipal(),
                 new UploadFile(fileData, fileStream));
+    }
+
+    @Path("registry-email")
+    @POST
+    public String sendRegistryEmail(@Auth Subject subject){
+        userService.sendRegistryEmail((String) subject.getPrincipal());
+        return "邮件已发送，请及时查收";
+    }
+
+    public UserRepository getRepository() {
+        return repository;
+    }
+
+    public void setRepository(UserRepository repository) {
+        this.repository = repository;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 }

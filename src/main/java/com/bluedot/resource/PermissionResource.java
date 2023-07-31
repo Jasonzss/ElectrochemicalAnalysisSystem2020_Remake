@@ -30,10 +30,12 @@ public class PermissionResource {
         return repository.findById(permissionId).orElseThrow(new ResourceException(CommonErrorCode.E_7001));
     }
 
-    public void deletePermission(int permissionId){
+    @DELETE
+    public void deletePermission(@QueryParam("id") int permissionId){
         repository.deleteById(permissionId);
     }
 
+    @POST
     public Permission addPermission(@BeanParam Permission permission){
         return repository.save(permission);
     }

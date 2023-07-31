@@ -3,6 +3,7 @@ package com.bluedot.resource;
 import com.bluedot.domain.rbac.Role;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.repository.RoleRepository;
+import com.bluedot.infrastructure.utils.ResourceUtil;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -27,23 +28,19 @@ public class RoleResource {
         return repository.findById(roleId).orElseThrow(new ResourceException(CommonErrorCode.E_7001));
     }
 
-    public void deleteRole(int roleId){
+    @DELETE
+    public void deleteRole(@QueryParam("id") int roleId){
         repository.deleteById(roleId);
     }
 
-    public Role addRole(String roleName, String roleDesc){
-        Role role = new Role();
-        role.setRoleName(roleName);
-        role.setDescription(roleDesc);
+    @POST
+    public Role addRole(@BeanParam Role role){
         return repository.save(role);
     }
 
-    public Role updateRole(int roleId, String roleName, String roleDesc){
-        Role role = new Role();
-        role.setRoleId(roleId);
-        role.setRoleName(roleName);
-        role.setDescription(roleDesc);
-        return repository.save(role);
+    @PUT
+    public Role updateRole(@BeanParam Role role){
+        return ResourceUtil.updateResource(role, role.getRoleId(), repository);
     }
 
     public RoleRepository getRepository() {
