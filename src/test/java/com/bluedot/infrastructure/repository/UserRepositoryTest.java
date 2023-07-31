@@ -43,4 +43,10 @@ public class UserRepositoryTest extends BaseTest {
         log.info(save.toString());
         repository.deleteById(u.getEmail());
     }
+
+    @Test
+    public void testFindSalt(){
+        User saltByEmail = repository.findSaltByEmail("2418972236@qq.com");
+        log.info(saltByEmail.getSalt());
+    }
 }
