@@ -1,6 +1,9 @@
 package com.bluedot.infrastructure.json;
 
 import com.bluedot.domain.process.model.Point;
+import com.bluedot.infrastructure.json.adapter.ApproximateTimeTypeAdapter;
+import com.bluedot.infrastructure.json.adapter.DateInChineseUnitTypeAdapter;
+import com.bluedot.infrastructure.json.adapter.FestivalTypeAdapter;
 import com.bluedot.infrastructure.repository.enumeration.UserStatus;
 import com.bluedot.infrastructure.utils.Quantity;
 import com.google.gson.*;
@@ -11,6 +14,7 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * @author Jason
@@ -21,7 +25,7 @@ import java.io.IOException;
 @Component
 public class ResponseGsonFactoryBean implements FactoryBean<Gson> {
     /**
-     * 添加有Quantity、Point重写逻辑的gson
+     * 添加有Quantity、Point、UsesStatus重写逻辑等其他逻辑的gson
      */
     @Override
     public Gson getObject() {
@@ -29,6 +33,9 @@ public class ResponseGsonFactoryBean implements FactoryBean<Gson> {
                .registerTypeAdapter(Quantity.class, new QuantityTypeAdapter())
                .registerTypeAdapter(Point.class, new PointTypeAdapter())
                .registerTypeAdapter(UserStatus.class, new UserStatusTypeAdapter())
+               .registerTypeAdapter(Date.class, new ApproximateTimeTypeAdapter())
+               .registerTypeAdapter(Date.class, new DateInChineseUnitTypeAdapter())
+               .registerTypeAdapter(Date.class, new FestivalTypeAdapter())
                .setExclusionStrategies(new ResponseIgnoreExclusionStrategies())
                .create();
     }

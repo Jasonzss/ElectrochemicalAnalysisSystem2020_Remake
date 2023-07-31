@@ -2,10 +2,13 @@ package com.bluedot.domain.rbac;
 
 import com.bluedot.infrastructure.json.ResponseEntity;
 import com.bluedot.infrastructure.json.ResponseIgnore;
+import com.bluedot.infrastructure.json.adapter.DateInChineseUnitTypeAdapter;
+import com.bluedot.infrastructure.json.adapter.FestivalTypeAdapter;
 import com.bluedot.infrastructure.repository.converter.GenderConverter;
-import com.bluedot.infrastructure.repository.converter.PasswordConverter;
 import com.bluedot.infrastructure.repository.enumeration.UserStatus;
+import com.google.gson.annotations.JsonAdapter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -27,7 +30,6 @@ public class User implements ResponseEntity {
     @Id
     private String email;
 
-    @Convert(converter = PasswordConverter.class)
     @Column(nullable = false)
     @ResponseIgnore
     private String password;
@@ -46,6 +48,7 @@ public class User implements ResponseEntity {
     @Convert(converter = GenderConverter.class)
     private String sex;
 
+    @JsonAdapter(FestivalTypeAdapter.class)
     private Date birthday;
 
     private Long tel;
@@ -55,6 +58,8 @@ public class User implements ResponseEntity {
 
     @CreationTimestamp
     @Column(name = "registration_date")
+    @Immutable
+    @JsonAdapter(DateInChineseUnitTypeAdapter.class)
     private Date registrationDate;
 
     public User() {
