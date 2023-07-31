@@ -2,17 +2,12 @@ package com.bluedot.resource.vo;
 
 import cn.hutool.core.date.DateUtil;
 import com.bluedot.domain.rbac.User;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUpload;
-import org.apache.http.entity.ContentType;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.Encoded;
 import javax.ws.rs.FormParam;
-import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Date;
 
 /**
  * @author Jason
