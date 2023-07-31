@@ -4,6 +4,7 @@ import org.apache.http.HttpStatus;
 
 /**
  * @author FireRain
+ * @author Jason
  * @version 1.0
  * @date 2022/8/17 11:47
  * 用户异常信息枚举类
@@ -88,11 +89,18 @@ public enum CommonErrorCode implements ErrorCode {
     E_6006(6006,HttpStatus.SC_UNAUTHORIZED, "请先完成验证码验证"),
     E_6007(6007,HttpStatus.SC_UNAUTHORIZED, "当前没有达到该资源的访问权限"),
     E_6008(6008,HttpStatus.SC_BAD_REQUEST, "修改头像失败，图片文件上传异常"),
+    E_6009(6009,HttpStatus.SC_BAD_REQUEST, "邮箱验证码错误，请重试"),
 
     /**
      * Resource模块异常
      */
     E_7001(7001,HttpStatus.SC_NOT_FOUND, "请求资源不存在"),
+
+    /**
+     * 基础模块异常
+     */
+    E_8001(8001,HttpStatus.SC_NOT_FOUND, "非法日期"),
+
 
     ;
 
