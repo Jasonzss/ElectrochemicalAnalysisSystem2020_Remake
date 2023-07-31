@@ -2,6 +2,7 @@ package com.bluedot.application;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
+import com.bluedot.infrastructure.utils.RandomCodeUtil;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +17,6 @@ import java.util.*;
 @Singleton
 @Component
 public class CaptchaDiagramService implements FactoryBean<CaptchaDiagramService> {
-    /**
-     * 字体只显示大写，去掉了1,0,I,O几个容易混淆的字符
-     */
-    public static final String VERIFY_CODES = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
-    public static final Integer CODE_LENGTH = 6;
 
     /**
      * 验证码集合：key为设置在客户端的cookie，用于唯一标识；value是对应客户端的验证码
@@ -34,7 +30,7 @@ public class CaptchaDiagramService implements FactoryBean<CaptchaDiagramService>
 
     public BufferedImage getCaptchaDiagram(UUID uuid){
         LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(220, 60);
-        captchaCodes.put(uuid, generateVerifyCode());
+        captchaCodes.put(uuid, RandomCodeUtil.generateVerifyCode());
         return lineCaptcha.getImage();
     }
 
@@ -61,19 +57,6 @@ public class CaptchaDiagramService implements FactoryBean<CaptchaDiagramService>
         return false;
     }
 
-    /**
-     * 使用指定源生成验证码
-     * @return 返回指定长度和字符的验证码字符串
-     */
-    private static String generateVerifyCode() {
-        int codesLen = VERIFY_CODES.length();
-        Random rand = new Random(System.currentTimeMillis());
-        StringBuilder verifyCode = new StringBuilder(CODE_LENGTH);
-        for (int i = 0; i < CODE_LENGTH; i++) {
-            verifyCode.append(VERIFY_CODES.charAt(rand.nextInt(codesLen - 1)));
-        }
-        return verifyCode.toString();
-    }
 
     /**
      * 仅供测试使用
