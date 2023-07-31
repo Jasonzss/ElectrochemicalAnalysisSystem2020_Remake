@@ -1,7 +1,7 @@
 package com.bluedot.domain.process;
 
 import com.bluedot.domain.algorithm.Algorithm;
-import com.bluedot.domain.algorithm.AlgorithmManager;
+import com.bluedot.application.AlgorithmService;
 import com.bluedot.domain.process.model.CurveParameter;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import javax.inject.Inject;
 @Component
 public class SimpleProcessor implements Processor{
     @Inject
-    AlgorithmManager manager;
+    AlgorithmService manager;
 
     @Override
     public Double[][] processData(Double[][] data, String algoId, Object... algoParams) {

@@ -3,6 +3,7 @@ package com.bluedot.domain.algorithm;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import com.bluedot.BaseTest;
+import com.bluedot.application.AlgorithmService;
 import com.bluedot.domain.algorithm.exception.AlgorithmException;
 import com.bluedot.domain.algorithm.java.JavaAlgoFactory;
 import com.bluedot.infrastructure.repository.enumeration.AlgorithmStatus;
@@ -22,8 +23,8 @@ import java.util.Optional;
  * @author Jason
  * @creationDate 2023/06/26 - 17:38
  */
-public class AlgorithmManagerTest extends BaseTest {
-    private AlgorithmManager manager;
+public class AlgorithmServiceTest extends BaseTest {
+    private AlgorithmService manager;
     private PersistantAlgorithm algo;
     private PersistantAlgorithm pAlgo;
     private PersistantAlgorithm algoUpdated;
@@ -97,7 +98,7 @@ public class AlgorithmManagerTest extends BaseTest {
         algoFactory.addFactory(pythonAlgoFactory);
 
         //构建AlgorithmManager
-        manager = new AlgorithmManager();
+        manager = new AlgorithmService();
         manager.setAlgoFactory(algoFactory);
         manager.setRepository(repository);
     }

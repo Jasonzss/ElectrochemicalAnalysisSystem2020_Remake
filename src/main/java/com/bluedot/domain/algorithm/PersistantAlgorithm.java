@@ -2,7 +2,10 @@ package com.bluedot.domain.algorithm;
 
 import com.bluedot.domain.rbac.User;
 import com.bluedot.infrastructure.json.ResponseEntity;
+import com.bluedot.infrastructure.json.adapter.ApproximateTimeTypeAdapter;
+import com.bluedot.infrastructure.json.adapter.DateInChineseUnitTypeAdapter;
 import com.bluedot.infrastructure.repository.enumeration.AlgorithmStatus;
+import com.google.gson.annotations.JsonAdapter;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -55,6 +58,7 @@ public class PersistantAlgorithm implements ResponseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
     @Column(name = "create_date", nullable = false)
+    @JsonAdapter(ApproximateTimeTypeAdapter.class)
     private Date createDate;
 
     /**
@@ -63,6 +67,7 @@ public class PersistantAlgorithm implements ResponseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     @Column(name = "modify_date", nullable = false)
+    @JsonAdapter(DateInChineseUnitTypeAdapter.class)
     private Date modifyDate;
 
     /**

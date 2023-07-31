@@ -8,7 +8,7 @@ import com.bluedot.application.electrochemistry.vo.CurveFileProcessForm;
 import com.bluedot.application.electrochemistry.vo.CurveProcessForm;
 import com.bluedot.application.electrochemistry.vo.ModelAnalysisForm;
 import com.bluedot.domain.algorithm.Algorithm;
-import com.bluedot.domain.algorithm.AlgorithmManager;
+import com.bluedot.application.AlgorithmService;
 import com.bluedot.domain.analysis.AnalysisResult;
 import com.bluedot.domain.analysis.Analyst;
 import com.bluedot.domain.analysis.model.AnalyzedData;
@@ -65,7 +65,7 @@ public class ElectrochemistryService {
     private AnalyzedModelReportRepository reportRepository;
 
     @Inject
-    private AlgorithmManager manager;
+    private AlgorithmService manager;
 
     @Inject
     Processor processor;

@@ -2,7 +2,7 @@ package com.bluedot.domain.analysis;
 
 import com.bluedot.application.electrochemistry.dto.CurveData;
 import com.bluedot.domain.algorithm.Algorithm;
-import com.bluedot.domain.algorithm.AlgorithmManager;
+import com.bluedot.application.AlgorithmService;
 import com.bluedot.domain.algorithm.exception.AlgorithmException;
 import com.bluedot.domain.analysis.model.AnalyzedData;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
@@ -23,7 +23,7 @@ import java.util.List;
 @Component
 public class SimpleAnalyst implements Analyst{
     @Inject
-    private AlgorithmManager manager;
+    private AlgorithmService manager;
 
     @Override
     public LinearEquation getModel(List<CurveData> dataList, String modelAlgorithmId) {

@@ -1,6 +1,9 @@
-package com.bluedot.domain.algorithm;
+package com.bluedot.application;
 
 import cn.hutool.core.util.ReflectUtil;
+import com.bluedot.domain.algorithm.Algorithm;
+import com.bluedot.domain.algorithm.PersistantAlgorithm;
+import com.bluedot.domain.algorithm.SimpleAlgoFactory;
 import com.bluedot.domain.algorithm.exception.AlgorithmException;
 import com.bluedot.domain.file.AbstractDomainFile;
 import com.bluedot.domain.file.model.JavaFile;
@@ -25,8 +28,8 @@ import java.util.Optional;
  * TODO 如何做到优雅的映射关系转换 ：算法id 算法实体类 算法工厂类 算法模型文件类 算法文件储存路径
  */
 @Component
-public class AlgorithmManager {
-    private static final Logger log = LoggerFactory.getLogger(AlgorithmManager.class);
+public class AlgorithmService {
+    private static final Logger log = LoggerFactory.getLogger(AlgorithmService.class);
 
     @Inject
     private AlgorithmRepository repository;
@@ -112,7 +115,7 @@ public class AlgorithmManager {
      * @param algoId 算法id
      * @return id对应的算法类型
      */
-    private AbstractDomainFile getFileById(String algoId) {
+    public AbstractDomainFile getFileById(String algoId) {
         return ReflectUtil.newInstance(getClassByType(algoId.substring(0, algoId.indexOf("_"))), algoId);
     }
 
