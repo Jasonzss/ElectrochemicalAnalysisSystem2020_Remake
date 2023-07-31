@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Modifying
     @Query("update User u set u.userImg = ?1 where u.email = ?2")
     void saveUserImage(String uri, String email);
+
+    User findSaltByEmail(String email);
 }
