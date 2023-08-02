@@ -1,11 +1,8 @@
 package com.bluedot.domain.rbac;
 
 import com.bluedot.infrastructure.json.ResponseEntity;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * @Author Jason

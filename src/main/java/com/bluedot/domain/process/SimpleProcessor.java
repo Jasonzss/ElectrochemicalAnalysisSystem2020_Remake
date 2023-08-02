@@ -1,7 +1,7 @@
 package com.bluedot.domain.process;
 
-import com.bluedot.domain.algorithm.Algorithm;
 import com.bluedot.application.AlgorithmService;
+import com.bluedot.domain.algorithm.Algorithm;
 import com.bluedot.domain.process.model.CurveParameter;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import org.springframework.stereotype.Component;

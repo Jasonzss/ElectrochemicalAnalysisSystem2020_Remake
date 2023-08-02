@@ -8,12 +8,8 @@ import com.bluedot.infrastructure.shiro.Auth;
 import org.apache.shiro.subject.Subject;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  * 基于shiro默认的认证功能提供的登录，因为shiro是靠内部维持session记录登录信息的所以设定本类为SessionResource

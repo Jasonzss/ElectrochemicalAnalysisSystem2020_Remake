@@ -1,12 +1,7 @@
 package com.bluedot.domain.file;
 
-import com.google.common.collect.Lists;
-
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.io.SequenceInputStream;
-import java.util.Collections;
 
 /**
  * 业务模型文件的顶级抽象

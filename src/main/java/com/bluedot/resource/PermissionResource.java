@@ -1,7 +1,5 @@
 package com.bluedot.resource;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.bean.copier.CopyOptions;
 import com.bluedot.domain.rbac.Permission;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.repository.PermissionRepository;
@@ -11,7 +9,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Jason

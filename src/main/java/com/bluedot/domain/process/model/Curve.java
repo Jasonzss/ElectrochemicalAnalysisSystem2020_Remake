@@ -1,11 +1,9 @@
 package com.bluedot.domain.process.model;
 
 import com.bluedot.infrastructure.repository.converter.PointsConverter;
-import com.bluedot.infrastructure.utils.LinearEquation;
 
 import javax.persistence.Convert;
 import javax.persistence.Embeddable;
-import javax.persistence.Transient;
 import java.util.List;
 
 /**

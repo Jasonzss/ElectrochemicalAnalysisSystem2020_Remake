@@ -4,14 +4,12 @@ import com.bluedot.application.electrochemistry.ElectrochemistryService;
 import com.bluedot.application.electrochemistry.dto.CurveData;
 import com.bluedot.application.electrochemistry.vo.CurveFileProcessForm;
 import com.bluedot.application.electrochemistry.vo.CurveProcessForm;
-import com.bluedot.domain.rbac.User;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.repository.CurveDataRepository;
 import com.bluedot.infrastructure.shiro.Auth;
 import com.bluedot.resource.dto.PageData;
 import com.bluedot.resource.vo.PageInfo;
 import org.apache.shiro.subject.Subject;
-import org.springframework.data.domain.Example;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

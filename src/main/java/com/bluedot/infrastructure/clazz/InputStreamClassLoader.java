@@ -3,9 +3,8 @@ package com.bluedot.infrastructure.clazz;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
-
-import static java.lang.ClassLoader.getSystemClassLoader;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author Jason

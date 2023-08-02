@@ -1,6 +1,5 @@
 package com.bluedot.infrastructure.json.adapter;
 
-import com.bluedot.infrastructure.date.type.ApproximateTimeConverter;
 import com.bluedot.infrastructure.date.type.FestivalDateFormatConverter;
 import com.google.gson.TypeAdapter;
 import com.google.gson.internal.bind.DateTypeAdapter;

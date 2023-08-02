@@ -1,7 +1,6 @@
 package com.bluedot.domain.algorithm.python;
 
 import cn.hutool.core.io.IoUtil;
-import cn.hutool.http.HttpException;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import org.apache.hc.client5.http.impl.classic.BasicHttpClientResponseHandler;
 import org.apache.hc.core5.http.ClassicHttpResponse;

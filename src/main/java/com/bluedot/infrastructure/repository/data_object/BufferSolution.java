@@ -2,7 +2,10 @@ package com.bluedot.infrastructure.repository.data_object;
 
 import com.bluedot.infrastructure.json.ResponseEntity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Jason

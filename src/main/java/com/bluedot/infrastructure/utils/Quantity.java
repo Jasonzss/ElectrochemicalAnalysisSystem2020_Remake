@@ -1,9 +1,9 @@
 package com.bluedot.infrastructure.utils;
 
+import com.bluedot.infrastructure.utils.UnitUtil.Unit;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
-import com.bluedot.infrastructure.utils.UnitUtil.Unit;
 
 /**
  * @author Jason

@@ -4,7 +4,6 @@ import com.bluedot.infrastructure.json.ResponseEntity;
 
 import javax.persistence.*;
 import javax.ws.rs.FormParam;
-import java.util.List;
 
 /**
  * @Author Jason

@@ -4,11 +4,11 @@ import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.converters.AbstractConverter;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.config.IniSecurityManagerFactory;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
 import org.springframework.beans.factory.FactoryBean;
-import org.apache.shiro.mgt.SecurityManager;
 import org.springframework.stereotype.Component;
 
 /**

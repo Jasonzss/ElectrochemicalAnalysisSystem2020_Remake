@@ -1,7 +1,6 @@
 package com.bluedot.infrastructure.repository.converter;
 
 import com.bluedot.domain.rbac.User;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

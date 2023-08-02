@@ -7,9 +7,7 @@ import com.bluedot.infrastructure.json.adapter.FestivalTypeAdapter;
 import com.bluedot.infrastructure.repository.converter.GenderConverter;
 import com.bluedot.infrastructure.repository.enumeration.UserStatus;
 import com.google.gson.annotations.JsonAdapter;
-import org.checkerframework.common.value.qual.EnumVal;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Immutable;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 
@@ -17,7 +15,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @Author Jason

@@ -1,6 +1,7 @@
 package com.bluedot.application.electrochemistry;
 
 import cn.hutool.core.collection.CollectionUtil;
+import com.bluedot.application.AlgorithmService;
 import com.bluedot.application.electrochemistry.dto.AnalyzedGraphData;
 import com.bluedot.application.electrochemistry.dto.AnalyzedModelReport;
 import com.bluedot.application.electrochemistry.dto.CurveData;
@@ -8,7 +9,6 @@ import com.bluedot.application.electrochemistry.vo.CurveFileProcessForm;
 import com.bluedot.application.electrochemistry.vo.CurveProcessForm;
 import com.bluedot.application.electrochemistry.vo.ModelAnalysisForm;
 import com.bluedot.domain.algorithm.Algorithm;
-import com.bluedot.application.AlgorithmService;
 import com.bluedot.domain.analysis.AnalysisResult;
 import com.bluedot.domain.analysis.Analyst;
 import com.bluedot.domain.analysis.model.AnalyzedData;
@@ -24,7 +24,10 @@ import com.bluedot.infrastructure.exception.CustomException;
 import com.bluedot.infrastructure.http.InputStreamResponseHandler;
 import com.bluedot.infrastructure.repository.AnalyzedModelReportRepository;
 import com.bluedot.infrastructure.repository.CurveDataRepository;
-import com.bluedot.infrastructure.utils.*;
+import com.bluedot.infrastructure.utils.LinearEquation;
+import com.bluedot.infrastructure.utils.PojoUtil;
+import com.bluedot.infrastructure.utils.Quantity;
+import com.bluedot.infrastructure.utils.UnitUtil;
 import com.google.gson.Gson;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.lang3.StringUtils;
