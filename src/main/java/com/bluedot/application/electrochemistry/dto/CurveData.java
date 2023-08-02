@@ -14,6 +14,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
+ * 波形数据
+ *
  * @author Jason
  * @creationDate 2023/07/11 - 16:12
  */

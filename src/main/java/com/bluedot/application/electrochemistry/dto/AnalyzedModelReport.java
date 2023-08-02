@@ -13,6 +13,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
+ * 建模并分析得来的实验报告
+ *
  * @author Jason
  * @creationDate 2023/07/16 - 20:34
  */

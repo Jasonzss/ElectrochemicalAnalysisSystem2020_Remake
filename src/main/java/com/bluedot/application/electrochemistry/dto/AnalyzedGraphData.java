@@ -5,6 +5,8 @@ import com.bluedot.infrastructure.utils.UnitUtil;
 import java.util.Map;
 
 /**
+ * 电化学分析后的数据，分为测试集和训练集，用于画报告图，放在一起方便传输
+ *
  * @author Jason
  * @creationDate 2023/07/16 - 20:36
  */
