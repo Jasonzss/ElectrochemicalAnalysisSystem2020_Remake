@@ -25,7 +25,7 @@ import java.lang.reflect.Type;
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
 @Component
-public class ResponseEntityWriter implements MessageBodyWriter<ResponseEntity> {
+public class EntityWriter implements MessageBodyWriter<ResponseEntity> {
 
     @Inject
     private Gson gson;
