@@ -12,7 +12,8 @@ import com.bluedot.infrastructure.repository.UserRepository;
 import com.bluedot.infrastructure.repository.enumeration.UserStatus;
 import com.bluedot.infrastructure.utils.RandomCodeUtil;
 import com.bluedot.resource.vo.UploadFile;
-import com.bluedot.resource.vo.UserForm;
+import com.bluedot.resource.vo.UserInfo;
+import com.bluedot.resource.vo.UserRegistryForm;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -54,11 +55,14 @@ public class UserService {
 
     /**
      * 注册用户
+     *
+     * TODO 对于邮箱验证应该不属于UserService的范围，感觉这部分杂糅了太多的逻辑
      * @param form 用户注册表单
      * @return 注册成功后的用户
      */
-    public User registerUser(UserForm form, String registryCode){
-        if (registryCode.equals(registryCodes.get(form.getEmail()))) {
+    public User registerUser(UserRegistryForm form, String registryCode){
+        //判断邮箱验证码是否正确
+        if (registryCode.equals(registryCodes.getOrDefault(form.getEmail(), null))) {
             registryCodes.remove(form.getEmail());
         }else {
             throw new UserException(CommonErrorCode.E_6009);
@@ -92,7 +96,7 @@ public class UserService {
         }
     }
 
-    public User updateUser(UserForm form){
+    public User updateUser(UserInfo form){
         User user = form.getUserFromForm();
 
         if(user.getPassword() != null){
@@ -162,6 +166,15 @@ public class UserService {
 
         MailUtil.send(toEmail, REGISTRY_EMAIL_TITLE, writer.toString(), true);
         registryCodes.put(toEmail, code);
+    }
+
+    /**
+     * 仅在测试中使用
+     * @param email 测试邮箱
+     * @param code 测试验证码
+     */
+    public void addRegistryCode(String email, String code){
+        registryCodes.put(email, code);
     }
 
     //------------------------------getters & setters----------------------------
