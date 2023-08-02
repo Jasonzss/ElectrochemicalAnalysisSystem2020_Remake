@@ -16,6 +16,7 @@ import java.util.Objects;
 @Table(name = "user_role")
 public class UserRole implements Serializable, ResponseEntity {
     @Id
+    @Column(name = "email")
     private String email;
     @Id
     @Column(name = "role_id")
@@ -35,6 +36,14 @@ public class UserRole implements Serializable, ResponseEntity {
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }
+
+    @Override
+    public String toString() {
+        return "UserRole{" +
+                "email='" + email + '\'' +
+                ", roleId=" + roleId +
+                '}';
     }
 
     @Override

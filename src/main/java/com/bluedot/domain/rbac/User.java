@@ -12,6 +12,7 @@ import org.hibernate.annotations.Immutable;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author Jason
@@ -58,7 +59,6 @@ public class User implements ResponseEntity {
 
     @CreationTimestamp
     @Column(name = "registration_date")
-    @Immutable
     @JsonAdapter(DateInChineseUnitTypeAdapter.class)
     private Date registrationDate;
 

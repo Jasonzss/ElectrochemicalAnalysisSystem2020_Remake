@@ -50,4 +50,12 @@ public class RolePermission implements ResponseEntity, Serializable {
     public int hashCode() {
         return Objects.hash(roleId, permissionId);
     }
+
+    @Override
+    public String toString() {
+        return "RolePermission{" +
+                "roleId=" + roleId +
+                ", permissionId=" + permissionId +
+                '}';
+    }
 }

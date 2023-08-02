@@ -1,8 +1,11 @@
 package com.bluedot.domain.rbac;
 
 import com.bluedot.infrastructure.json.ResponseEntity;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @Author Jason
@@ -20,6 +23,17 @@ public class Role implements ResponseEntity {
     @Column(name = "role_name", nullable = false, unique = true)
     private String roleName;
     private String description;
+
+    //这样子关联的话，一查就会把所有相关的查询出来，太不靠谱
+
+//    @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
+//    @Fetch(FetchMode.SUBSELECT)
+//    @JoinTable(name = "role_permission", joinColumns = {@JoinColumn(name = "role_id")}, inverseJoinColumns = {@JoinColumn(name = "permission_id")})
+//    private List<Permission> permissions;    // 角色 -- 权限关系,多对多关系
+//
+//    @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "role_id")}, inverseJoinColumns = {@JoinColumn(name = "email")})
+//    private List<User> users;    // 用户 - 角色关系定义,一个角色对应多个用户
 
     public Integer getRoleId() {
         return roleId;
