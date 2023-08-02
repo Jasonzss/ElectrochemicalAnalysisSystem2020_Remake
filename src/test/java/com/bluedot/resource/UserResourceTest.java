@@ -63,6 +63,19 @@ public class UserResourceTest extends BaseJerseyTest {
     }
 
     @Test
+    public void testUpdateUser() {
+        Cookie cookie = loginAsSuperManager();
+
+        Form form = new Form();
+        form.param("sex", "女");
+
+        Response put = target(path).path(EMAIL).request().cookie(cookie)
+                .put(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
+
+        TestUtils.printResponse(put);
+    }
+
+    @Test
     public void testUpdateUserImg() {
         Cookie cookie = loginAsSuperManager();
 
