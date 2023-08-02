@@ -1,23 +1,14 @@
 package com.bluedot.resource;
 
-import cn.hutool.core.date.DateUtil;
-import com.bluedot.TestUtil;
-import com.bluedot.infrastructure.jax_rs.CustomExceptionMapper;
-import com.bluedot.infrastructure.jax_rs.LeastExceptionMapper;
-import com.bluedot.resource.vo.UserForm;
+import com.bluedot.TestUtils;
+import com.bluedot.resource.vo.UserInfo;
 import org.glassfish.jersey.media.multipart.*;
 import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.test.JerseyTest;
-import org.glassfish.jersey.test.TestProperties;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.core.*;
-import javax.ws.rs.ext.MessageBodyWriter;
 import java.io.File;
 
 /**
@@ -28,38 +19,51 @@ public class UserResourceTest extends BaseJerseyTest {
     final String path = "users";
 
     @Test
-    public void testGet(){
-        final Builder request = target(path).path("2418972236@qq.com").request();
+    public void testGet() {
+        Cookie cookie = loginAsSuperManager();
+
+        final Builder request = target(path).path(EMAIL).request().cookie(cookie);
         Response response = request.get();
         String s = response.readEntity(String.class);
         log.info(s);
     }
 
+    /**
+     * 需要获取邮箱验证码才能注册
+     */
     @Test
-    public void testRegisterUser(){
-        final Form form = new Form();
-        form.param(UserForm.EMAIL, EMAIL);
-        form.param(UserForm.USERNAME, USERNAME);
-        form.param(UserForm.BIRTHDAY, BIRTHDAY);
-        form.param(UserForm.TEL, TEL);
-        form.param(UserForm.PASSWORD, PASSWORD);
-        form.param(UserForm.SEX, SEX);
+    public void testRegisterUser() {
+        Cookie cookie = loginAsSuperManager();
+        File img = new File("src\\test\\resources\\hanako.png");
 
-        Response post = target(path).request().post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
-        TestUtil.printResponse(post);
+        FileDataBodyPart filePart = new FileDataBodyPart("file", img);
+        FormDataMultiPart formDataMultiPart = new FormDataMultiPart();
+
+        formDataMultiPart.field(UserInfo.EMAIL,      I_EMAIL     );
+        formDataMultiPart.field(UserInfo.USERNAME,   I_USERNAME  );
+        formDataMultiPart.field(UserInfo.BIRTHDAY,   I_BIRTHDAY  );
+        formDataMultiPart.field(UserInfo.TEL,        I_TEL       );
+        formDataMultiPart.field(UserInfo.PASSWORD,   I_PASSWORD  );
+        formDataMultiPart.field(UserInfo.SEX,        I_SEX       );
+        FormDataMultiPart multipart = (FormDataMultiPart) formDataMultiPart.bodyPart(filePart);
+
+        Response post = target(path).request().cookie(cookie).post(Entity.entity(multipart, multipart.getMediaType()));
+        TestUtils.printResponse(post);
     }
 
     @Test
-    public void testGetUserPage(){
+    public void testGetUserPage() {
+        Cookie cookie = loginAsSuperManager();
         Response response = target(path).path("/pages").queryParam("page", 0)
                 .queryParam("limit", 2)
                 .request()
+                .cookie(cookie)
                 .get();
-        TestUtil.printResponse(response);
+        TestUtils.printResponse(response);
     }
 
     @Test
-    public void testUpdateUserImg(){
+    public void testUpdateUserImg() {
         Cookie cookie = loginAsSuperManager();
 
         File img = new File("src\\test\\resources\\hanako.png");
@@ -75,6 +79,6 @@ public class UserResourceTest extends BaseJerseyTest {
                 .cookie(cookie)
                 .put(Entity.entity(multiPart, multiPart.getMediaType()));
 
-        TestUtil.printResponse(response);
+        TestUtils.printResponse(response);
     }
 }

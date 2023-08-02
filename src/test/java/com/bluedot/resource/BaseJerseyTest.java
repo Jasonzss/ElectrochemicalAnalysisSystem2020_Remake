@@ -2,16 +2,15 @@ package com.bluedot.resource;
 
 import cn.hutool.core.date.DateUtil;
 import com.bluedot.application.CaptchaDiagramService;
-import com.bluedot.domain.rbac.User;
 import com.bluedot.infrastructure.jax_rs.CustomExceptionMapper;
 import com.bluedot.infrastructure.jax_rs.LeastExceptionMapper;
-import com.bluedot.resource.vo.UserForm;
+import com.bluedot.resource.vo.UserInfo;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
-import org.glassfish.jersey.media.multipart.internal.MultiPartWriter;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,25 +26,62 @@ public class BaseJerseyTest extends JerseyTest {
 
     private final CaptchaDiagramService service = CaptchaDiagramService.getCaptchaDiagramService();
 
+    //---------------测试专用用户数据------------------------
     /**
-     * 测试专用用户数据
+     * 超级管理员数据：
      */
-    protected final static String EMAIL = "54321@test.com";
-    protected final static String USERNAME = "测试名称";
+    protected final static String EMAIL = "superadmin@test.com";
+    protected final static String USERNAME = "超管";
     protected final static String BIRTHDAY = DateUtil.now();
     protected final static String TEL = "10086";
     protected final static String PASSWORD = "123456aa.";
     protected final static String SEX = "男";
-    protected static UserForm user;
+    protected static UserInfo superAdmin;
+    /**
+     * 管理员数据：
+     */
+    protected final static String admin_EMAIL = "admin@test.com";
+    protected final static String admin_USERNAME = "管理员";
+    protected final static String admin_BIRTHDAY = DateUtil.now();
+    protected final static String admin_TEL = "10085";
+    protected final static String admin_PASSWORD = "654321";
+    protected final static String admin_SEX = "女";
+    protected static UserInfo admin;
+    /**
+     * 实验员数据：
+     */
+    protected final static String I_EMAIL = "jason@test.com";
+    protected final static String I_USERNAME = "实验员Jason";
+    protected final static String I_BIRTHDAY = DateUtil.now();
+    protected final static String I_TEL = "10088";
+    protected final static String I_PASSWORD = "789456";
+    protected final static String I_SEX = "女";
+    protected static UserInfo u;
 
     static {
-        user = new UserForm();
-        user.setEmail(EMAIL);
-        user.setUsername(USERNAME);
-        user.setBirthday(BIRTHDAY);
-        user.setTel(TEL);
-        user.setPassword(PASSWORD);
-        user.setSex(SEX);
+        superAdmin = new UserInfo();
+        superAdmin.setEmail(EMAIL);
+        superAdmin.setUsername(USERNAME);
+        superAdmin.setBirthday(BIRTHDAY);
+        superAdmin.setTel(TEL);
+        superAdmin.setPassword(PASSWORD);
+        superAdmin.setSex(SEX);
+
+        admin = new UserInfo();
+        admin.setEmail(admin_EMAIL);
+        admin.setUsername(admin_USERNAME);
+        admin.setBirthday(admin_BIRTHDAY);
+        admin.setTel(admin_TEL);
+        admin.setPassword(admin_PASSWORD);
+        admin.setSex(admin_SEX);
+
+        u = new UserInfo();
+        u.setEmail(I_EMAIL);
+        u.setUsername(I_USERNAME);
+        u.setBirthday(I_BIRTHDAY);
+        u.setTel(I_TEL);
+        u.setPassword(I_PASSWORD);
+        u.setSex(I_SEX);
     }
 
     @Override
@@ -82,7 +118,8 @@ public class BaseJerseyTest extends JerseyTest {
                 .cookie(new NewCookie("captcha-id", captchaId))
                 .post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
 
-        log.info(post.getEntity().toString());
+        log.info(post.getStatusInfo().getReasonPhrase());
+        log.info(captchaId);
         return captchaId;
     }
 
@@ -104,8 +141,14 @@ public class BaseJerseyTest extends JerseyTest {
                 .cookie(newCookie)
                 .post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
 
-        log.info(post.getEntity().toString());
+        log.info(post.getStatusInfo().getReasonPhrase());
+        log.info(cookie);
 
         return newCookie;
+    }
+
+    @Test
+    public void testLogin(){
+        loginAsSuperManager();
     }
 }

@@ -1,6 +1,6 @@
 package com.bluedot.resource;
 
-import com.bluedot.TestUtil;
+import com.bluedot.TestUtils;
 import com.bluedot.application.CaptchaDiagramService;
 import org.junit.After;
 import org.junit.Test;
@@ -60,6 +60,6 @@ public class CaptchaDiagramResourceTest extends BaseJerseyTest {
         Response post = target(path).request()
                 .cookie(new NewCookie("captcha-id", captchaId))
                 .post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
-        TestUtil.printResponse(post);
+        TestUtils.printResponse(post);
     }
 }

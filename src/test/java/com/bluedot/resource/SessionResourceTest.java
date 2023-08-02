@@ -1,8 +1,6 @@
 package com.bluedot.resource;
 
-import com.bluedot.TestUtil;
-import com.bluedot.resource.vo.UserForm;
-import org.junit.Before;
+import com.bluedot.TestUtils;
 import org.junit.Test;
 
 import javax.ws.rs.client.Entity;
@@ -30,6 +28,6 @@ public class SessionResourceTest extends BaseJerseyTest {
         Response post = target(path).request()
                 .cookie(new NewCookie("captcha-id", cookie))
                 .post(Entity.entity(form, MediaType.APPLICATION_FORM_URLENCODED));
-        TestUtil.printResponse(post);
+        TestUtils.printResponse(post);
     }
 }

@@ -13,8 +13,8 @@ import java.nio.charset.StandardCharsets;
  * @author Jason
  * @creationDate 2023/07/22 - 22:57
  */
-public class TestUtil {
-    private static final Logger log = LoggerFactory.getLogger(TestUtil.class);
+public class TestUtils {
+    private static final Logger log = LoggerFactory.getLogger(TestUtils.class);
 
     public static void printResponse(Response response){
         log.info(response.getStatusInfo().getStatusCode()+" "+response.getStatusInfo().getReasonPhrase());

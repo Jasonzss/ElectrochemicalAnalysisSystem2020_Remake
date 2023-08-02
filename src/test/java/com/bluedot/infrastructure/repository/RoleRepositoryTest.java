@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.List;
+
 /**
  * @author Jason
  * @creationDate 2023/07/18 - 9:52
@@ -28,5 +30,11 @@ public class RoleRepositoryTest extends BaseTest {
         Role save = repository.save(role);
         log.info(save.toString());
         repository.delete(save);
+    }
+
+    @Test
+    public void testFindRolesByEmail(){
+        List<Role> rolesByEmail = repository.findRolesByEmail("2418972236@qq.com");
+        log.info(rolesByEmail.toString());
     }
 }
