@@ -45,6 +45,7 @@ public class PersistantAlgorithm implements ResponseEntity {
      * 这里就暂时选择将两个业务放在一个类里吧
      */
     @OneToOne
+    @JoinColumn(name = "creator_email", referencedColumnName = "email")
     private User creator;
 
     /**
