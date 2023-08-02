@@ -87,6 +87,7 @@ public class UserResource {
     }
 
     @PUT
+    @Path("{email}")
     @Produces(MediaType.APPLICATION_JSON)
     @RequiresPermissions("user:update:self")
     public User updateUser(@BeanParam UserInfo form) {

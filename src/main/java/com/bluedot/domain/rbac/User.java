@@ -7,10 +7,15 @@ import com.bluedot.infrastructure.json.adapter.FestivalTypeAdapter;
 import com.bluedot.infrastructure.repository.converter.GenderConverter;
 import com.bluedot.infrastructure.repository.enumeration.UserStatus;
 import com.google.gson.annotations.JsonAdapter;
+import org.checkerframework.common.value.qual.EnumVal;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Immutable;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.util.Date;
 import java.util.List;
 
@@ -29,10 +34,12 @@ public class User implements ResponseEntity {
     public static final Integer GIRL_DB = 0;
 
     @Id
+    @Email(message = "非法邮箱")
     private String email;
 
     @Column(nullable = false)
     @ResponseIgnore
+    @Length(min = 6, max = 20, message = "密码长度应在6~20之间")
     private String password;
 
     @Column(nullable = false)
@@ -44,14 +51,18 @@ public class User implements ResponseEntity {
     private UserStatus userStatus;
 
     @Column(nullable = false)
+    @NotNull
+    @Length(min = 2, max = 20, message = "用户昵称长度应在2~20之间")
     private String username;
 
     @Convert(converter = GenderConverter.class)
     private String sex;
 
     @JsonAdapter(FestivalTypeAdapter.class)
+    @Past
     private Date birthday;
 
+    @Length(min = 11, max = 11)
     private Long tel;
 
     @Column(name = "user_img", nullable = false)

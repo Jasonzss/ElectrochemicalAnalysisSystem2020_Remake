@@ -5,6 +5,7 @@ import com.bluedot.domain.rbac.User;
 
 import javax.ws.rs.Encoded;
 import javax.ws.rs.FormParam;
+import javax.ws.rs.PathParam;
 
 /**
  * @author Jason
@@ -18,7 +19,7 @@ public class UserInfo {
     public static final String BIRTHDAY = "birthday";
     public static final String TEL = "tel";
 
-    @FormParam(EMAIL)
+    @PathParam(EMAIL)
     private String email;
     @FormParam(PASSWORD)
     @Encoded

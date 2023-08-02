@@ -7,6 +7,7 @@ import com.bluedot.infrastructure.json.ResponseEntity;
 import com.bluedot.infrastructure.repository.converter.AnalyzedDataConverter;
 import com.bluedot.infrastructure.repository.converter.LinearEquationConverter;
 import com.bluedot.infrastructure.utils.LinearEquation;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -23,9 +24,11 @@ public class AnalyzedModelReport implements ResponseEntity {
     @GeneratedValue
     private Integer reportId;
 
+    @Length(min = 2, max = 20)
     private String title;
 
     @Column(name = "material_name")
+    @Length(min = 2, max = 20)
     private String materialName;
 
     @OneToOne

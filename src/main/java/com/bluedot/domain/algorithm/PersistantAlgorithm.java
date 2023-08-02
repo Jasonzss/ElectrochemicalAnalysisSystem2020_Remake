@@ -7,6 +7,7 @@ import com.bluedot.infrastructure.json.adapter.DateInChineseUnitTypeAdapter;
 import com.bluedot.infrastructure.repository.enumeration.AlgorithmStatus;
 import com.google.gson.annotations.JsonAdapter;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class PersistantAlgorithm implements ResponseEntity {
      * 算法的名称，是展示给用户看的名称，而不是类名或是文件名。
      */
     @Column(name = "algo_name", nullable = false)
+    @Length(min = 2, max = 30)
     private String algoName;
 
     /**
