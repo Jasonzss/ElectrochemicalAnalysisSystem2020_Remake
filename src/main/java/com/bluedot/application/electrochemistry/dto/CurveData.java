@@ -25,7 +25,7 @@ public class CurveData implements ResponseEntity {
     @GeneratedValue
     private Integer curveDataId;
 
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "user_email", referencedColumnName = "email", nullable = false)
     @ManyToOne
     private User user;
 
