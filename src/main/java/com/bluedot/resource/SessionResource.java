@@ -5,9 +5,9 @@ import com.bluedot.application.UserService;
 import com.bluedot.domain.rbac.exception.UserException;
 import com.bluedot.infrastructure.exception.CommonErrorCode;
 import com.bluedot.infrastructure.shiro.Auth;
+import org.apache.shiro.subject.Subject;
 
 import javax.inject.Inject;
-import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
@@ -44,14 +44,8 @@ public class SessionResource {
     }
 
     @DELETE
-    public String invalidateHttpSession(@Context HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            throw new WebApplicationException(Response.Status.BAD_REQUEST);
-        }
-
-        session.invalidate();
-        return "登出成功！";
+    public void invalidateHttpSession(@Auth Subject subject){
+        subject.logout();
     }
 
     public UserService getUserService() {

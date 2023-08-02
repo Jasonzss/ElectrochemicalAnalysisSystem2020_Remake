@@ -2,25 +2,21 @@ package com.bluedot.resource.vo;
 
 import cn.hutool.core.date.DateUtil;
 import com.bluedot.domain.rbac.User;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.Encoded;
 import javax.ws.rs.FormParam;
-import java.io.InputStream;
 
 /**
  * @author Jason
  * @creationDate 2023/07/21 - 15:38
  */
-public class UserForm {
+public class UserInfo {
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String USERNAME = "username";
     public static final String SEX = "sex";
     public static final String BIRTHDAY = "birthday";
     public static final String TEL = "tel";
-    public static final String USER_IMG = "user-img";
 
     @FormParam(EMAIL)
     private String email;
@@ -35,12 +31,6 @@ public class UserForm {
     private String birthday;
     @FormParam(TEL)
     private String tel;
-
-    @FormDataParam("user-img")
-    private FormDataContentDisposition userImg;
-
-    @FormDataParam("user-img")
-    private InputStream userImgStream;
 
     public String getEmail() {
         return email;
@@ -90,26 +80,6 @@ public class UserForm {
         this.tel = tel;
     }
 
-    public FormDataContentDisposition getUserImg() {
-        return userImg;
-    }
-
-    public void setUserImg(FormDataContentDisposition userImg) {
-        this.userImg = userImg;
-    }
-
-    public InputStream getUserImgStream() {
-        return userImgStream;
-    }
-
-    public void setUserImgStream(InputStream userImgStream) {
-        this.userImgStream = userImgStream;
-    }
-
-    public UploadFile getUploadFile(){
-        return userImgStream == null ? null : new UploadFile(userImg, userImgStream);
-    }
-
     public User getUserFromForm(){
         User u = new User();
         u.setEmail(email);
@@ -123,14 +93,13 @@ public class UserForm {
 
     @Override
     public String toString() {
-        return "UserForm{" +
+        return "UserInfo{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", username='" + username + '\'' +
                 ", sex='" + sex + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", tel='" + tel + '\'' +
-                ", userImg=" + userImg +
                 '}';
     }
 }

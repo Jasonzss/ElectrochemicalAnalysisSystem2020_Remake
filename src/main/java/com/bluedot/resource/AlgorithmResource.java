@@ -11,6 +11,7 @@ import com.bluedot.infrastructure.utils.ResourceUtil;
 import com.bluedot.resource.dto.PageData;
 import com.bluedot.resource.vo.PageInfo;
 import org.apache.http.entity.ContentType;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.data.domain.Example;
 
@@ -38,12 +39,14 @@ public class AlgorithmResource {
 
     @GET
     @Path("{id}")
+    @RequiresPermissions("algorithm:get:*")
     public PersistantAlgorithm getPersistantAlgorithm(@PathParam("id") String id){
         return repository.findById(id).orElseThrow(new ResourceException(CommonErrorCode.E_7001));
     }
 
     @GET
     @Path("algo-content/{id}")
+    @RequiresPermissions("algorithm:get:*")
     public Response getAlgoContent(@PathParam("id") String id) throws FileNotFoundException {
         InputStream inputStream = service.getFileById(id).getInputStream();
         return Response.ok((StreamingOutput) output -> IoUtil.copy(inputStream, output))
@@ -56,6 +59,7 @@ public class AlgorithmResource {
 
     @PUT
     @Path("algo-content/{id}")
+    @RequiresPermissions("algorithm:update:*")
     public String updateAlgoContent(@PathParam("id") String id, @FormDataParam("file") InputStream fileStream)
             throws FileNotFoundException {
         service.updateAlgorithm(id, fileStream);
@@ -63,6 +67,7 @@ public class AlgorithmResource {
     }
 
     @POST
+    @RequiresPermissions("algorithm:create:*")
     public PersistantAlgorithm addPersistantAlgorithm(@BeanParam PersistantAlgorithm algorithm,
                                                       @FormDataParam("file") InputStream fileStream){
         Algorithm a = service.createAlgorithm(fileStream, algorithm);
@@ -70,33 +75,22 @@ public class AlgorithmResource {
     }
 
     @PUT
+    @RequiresPermissions("algorithm:update:*")
     public PersistantAlgorithm updatePersistantAlgorithm(@BeanParam PersistantAlgorithm algorithm){
         return ResourceUtil.updateResource(algorithm, algorithm.getAlgoId(), repository);
     }
 
     @DELETE
+    @RequiresPermissions("algorithm:delete:*")
     public void deletePersistantAlgorithm(@QueryParam("id") List<String> ids){
         repository.deleteAllById(ids);
     }
 
     @Path("pages")
     @GET
+    @RequiresPermissions("algorithm:get:*")
     public PageData<PersistantAlgorithm> getPersistantAlgorithmPage(@BeanParam PageInfo pageInfo){
         return PageData.of(repository.findAll(pageInfo.getPageable()));
-    }
-
-
-    @Path("pages/{email}")
-    @GET
-    public PageData<PersistantAlgorithm> getPersistantAlgorithmPageByEmail(
-            @PathParam("email") String email,
-            @BeanParam PageInfo pageInfo){
-        User user = new User(email);
-        PersistantAlgorithm algorithm = new PersistantAlgorithm();
-        algorithm.setCreator(user);
-        Example<PersistantAlgorithm> algorithmExample = Example.of(algorithm);
-
-        return PageData.of(repository.findAll(algorithmExample, pageInfo.getPageable()));
     }
 
     public AlgorithmRepository getRepository() {

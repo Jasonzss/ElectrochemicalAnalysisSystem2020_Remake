@@ -2,6 +2,7 @@ package com.bluedot.resource;
 
 import com.bluedot.application.CaptchaDiagramService;
 import org.apache.http.entity.ContentType;
+import org.apache.shiro.authz.annotation.RequiresGuest;
 
 import javax.imageio.ImageIO;
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ public class CaptchaDiagramResource {
 
     @GET
     @Produces("image/png")
+    @RequiresGuest
     public Response getCaptchaDiagram(){
         UUID uuid = UUID.randomUUID();
         Image captchaDiagram = service.getCaptchaDiagram(uuid);
@@ -41,6 +43,7 @@ public class CaptchaDiagramResource {
     }
 
     @POST
+    @RequiresGuest
     public Response verifyCaptchaDiagram(@FormParam("verify-code") String code,
                                          @CookieParam("captcha-id") String captchaId){
         if(service.verifyCode(code, captchaId)){

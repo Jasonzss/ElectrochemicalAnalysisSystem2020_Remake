@@ -55,16 +55,6 @@ public class CurveDataResource {
         return PageData.of(repository.findAll(pageInfo.getPageable()));
     }
 
-    @Path("pages/{email}")
-    public PageData<CurveData> getCurveDataPageByEmail(@PathParam("email") String email,@BeanParam PageInfo pageInfo){
-        User user = new User(email);
-        CurveData data = new CurveData();
-        data.setUser(user);
-        Example<CurveData> dataExample = Example.of(data);
-
-        return PageData.of(repository.findAll(dataExample, pageInfo.getPageable()));
-    }
-
     public CurveDataRepository getRepository() {
         return repository;
     }
