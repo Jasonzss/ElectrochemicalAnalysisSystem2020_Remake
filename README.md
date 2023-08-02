@@ -2,11 +2,18 @@
 
 **采用主流技术重置EAS，业务逻辑不会改变太多，这是2代的工作。重置的目的是巩固和落实一下最近学的技术栈和技术思想**
 **项目目录解释**
+
 **python：pythonweb模块，与javaweb使用http协议沟通，负责执行java端传过来的python算法文件**
+
 **resources：RESTful风格设计的接口层，提供Api给前端使用**
+
 **domain：以面向对象的方式对业务领域建模得来的领域层，是项目核心业务的主要所在。**
+
 **repository：数据持久层，使用JPA的规范实现**
+
 **application：实现一些不在domain和repository层实现的逻辑，为resources提供简单的接口调用**
+
+
 **infrastructure：非业务上的基础设施，包括对使用框架的扩展、工具类等**
 
 # 一、架构
@@ -18,27 +25,49 @@
 # 二、技术选型
 
 **开发IDE：IDEA 2020**
+
 **JDK：1.8**
+
 **服务器：Servlet4.0、Tomcat8**
+
 **数据库：MySQL8**
+
 **持久层：SpringJPA**
+
 **数据源：Druid**
+
 **数据校验：Hibernate Validator**
+
 **安全框架：shiro**
+
 **DI框架：主要是Spring5**
+
 **接口设计：RESTful风格、Jersey2**
+
 **接口测试：JerseyClient**
+
 **代码托管：git/github**
+
 **项目管理：maven**
+
 **工具包：guava、apache commons、hutool**
+
 **邮件发送：JavaMail**
+
 **测试框架：JUnit、Mockito**
+
 **日志：log4j、slf4j**
+
 **json处理：gson**
+
 **python版本：python 3**
+
 **pythonweb框架：flask**
+
 **http请求工具：httpclient5**
+
 **缓存：Ehcache**
+
 **压缩工具：snappy**
 
 # 三、领域分析
