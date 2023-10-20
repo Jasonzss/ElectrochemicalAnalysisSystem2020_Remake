@@ -1,5 +1,6 @@
 # 0、这是什么？
-** 原项目地址：https://github.com/Jasonzss/ElectrochemicalAnalysisSystem2023 **
+原项目地址：https://github.com/Jasonzss/ElectrochemicalAnalysisSystem2023 **
+
 **采用主流技术重置EAS，业务逻辑不会改变太多，这是2代的工作。重置的目的是巩固和落实一下最近学的技术栈和技术思想**
 **项目目录解释**
 
